@@ -1,0 +1,27 @@
+{
+  "name": "vat-deductor-tmp-main",
+  "version": "1.0.0",
+  "description": "MVP tool aimed at shortcutting a vendor-buyer process related to the current Venezuelan tax system.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env --experimental-strip-types --experimental-sqlite ./src/server.js",
+    "test": "vitest",
+    "postinstall": "prisma generate --no-engine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.16.3",
+    "prisma": "^6.16.3",
+    "vitest": "^3.2.4"
+  }
+}

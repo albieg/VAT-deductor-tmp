@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./src/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgcrypto]
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  firstName String    @map("first_name")
+  lastName  String    @map("last_name")
+  isAdmin   Boolean   @default(false) @map("is_admin")
+  email     String    @unique @map("email")
+  password  String    @map("password")
+  madeAt    DateTime  @default(now()) @map("made_at")
+  invoices  Invoice[]
+}
+
+model Enterprise {
+  id       Int     @id @default(autoincrement())
+  entRif   String  @unique @map("ent_rif")
+  entName  String  @map("ent_name")
+  entAddr  String  @map("ent_address")
+  entPhone String  @map("ent_phone_number")
+  retPerc  Boolean @default(false) @map("retention_percentage")
+}
+
+model Invoice {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  vendRif   String   @map("vendor_rif")
+  vendName  String   @map("vendor_name")
+  vendAddr  String   @map("vendor_address")
+  vendPhone String   @map("vendor_phone_number")
+  rcptNum   Int      @map("receipt_number")
+  rcptName  String   @map("receipt_file_name")
+  rcptUrl   String   @map("receipt_file_url")
+  ctrlNum   Int      @map("control_number")
+  taxBase   Decimal  @map("taxable_base")
+  vatPerc   Int      @map("vat_percentage")
+  total     Decimal  @map("total")
+  excel     String   @map("excel_file")
+  sentTo    String   @map("sent_to")
+  emission  DateTime @default(now()) @map("emitted_at")
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Contact {
+  id        Int     @id @default(autoincrement())
+  contType  Boolean @default(false) @map("contact_type")
+  contName  String  @unique @map("contact_name")
+  contEmail String  @unique @map("contact_email")
+  contPhone String  @map("contact_phone_number")
+}
