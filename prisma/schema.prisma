@@ -36,8 +36,16 @@ model Enterprise {
   entName   String     @map("ent_name")
   entAddr   String     @map("ent_address")
   entPhone  String     @map("ent_phone_number")
-  retPerc   Boolean    @map("retention_percentage") @default(false)
-  invSerial String        @map("invoice_serial_num")
+  deducPerc Boolean    @map("retention_percentage") @default(false)
+}
+
+model SerialTracker {
+  id        Int        @id @default(autoincrement())
+  enterpId  Int        @map("enterprise_id") @unique
+  serial    Int        @map("current_serial") @default(0)
+  updateAt  DateTime   @map("updated_at")
+
+  enterprise Enterprise @relation(fields: [enterpriseId], references: [id])
 }
 
 
@@ -62,6 +70,8 @@ model Invoice {
   excel     String     @map("excel_file")
   sentTo    String     @map("sent_to")
   emission  DateTime   @map("emitted_at") @default(now())
+  serial    Int        @map("serial") @unique
+
   user      User       @relation(fields: [userId], references: [id])
 }
 

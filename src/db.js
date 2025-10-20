@@ -1,10 +1,11 @@
 import sqlite3 from 'sqlite3';
 const db = new sqlite3.Database(':memory:')
 
-// Execute SQL statements from strings
+
 db.exec(`
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        enterprise_id INTEGER UNIQUE
         username TEXT UNIQUE,
         first_name TEXT,
         last_name TEXT,
@@ -12,6 +13,7 @@ db.exec(`
         email CITEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         made_at TIMESTAMPTZ DEFAULT now()
+        FOREIGN KEY(enterprise_id) REFERENCES enterprise(id)
     )
 `)
 
@@ -23,8 +25,17 @@ db.exec(`
         ent_name TEXT,
         ent_address TEXT,
         ent_phone_number TEXT CHECK (phone ~ '^\+\d{1,15}$'),
-        retention_percentage BOOLEAN DEFAULT 0,
-        invoice_serial_num TEXT
+        deduction_percentage BOOLEAN DEFAULT 0
+    )
+`)
+
+db.exec(`
+    CREATE TABLE serialTracker (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    enterprise_id INTEGER UNIQUE
+    current_serial INTEGER DEFAULT 0
+    updated_at TIMESTAMPTZ DEFAULT  now()
+    FOREIGN KEY(enterprise_id) REFERENCES enterprise(id)
     )
 `)
 
@@ -51,6 +62,7 @@ db.exec(`
         excel_file_url TEXT,
         sent_to TEXT,
         emitted_at TIMESTAMPTZ DEFAULT now(),
+        serial INTEGER UNIQUE
         FOREIGN KEY(user_id) REFERENCES users(id)
     )
 `)

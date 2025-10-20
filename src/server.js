@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
 import enterpriseRoutes from './routes/enterpriseRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import invoiceRoutes from './routes/invoiceRoutes.js'
 import authMiddleware from './middleware/authMiddleware.js'
 
 const app = express()
@@ -24,6 +25,9 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, '../public')))
 
+// serve uploaded files statically to view
+app.use("/uploads", express.static("uploads"));
+
 
 // serving up the html file from the public directory
 app.get('/', (req, res) => {
@@ -35,6 +39,7 @@ app.use('/auth', authRoutes)
 app.use('/contact', authMiddleware, contactRoutes)
 app.use('/enterprise', authMiddleware, enterpriseRoutes)
 app.use('/user', authMiddleware, userRoutes)
+app.use('/invoice', authMiddleware, invoiceRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server has started on port: ${PORT}`)
