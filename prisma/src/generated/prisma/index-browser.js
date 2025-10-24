@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.3
- * Query Engine version: bb420e667c1820a8c05a38023385f6cc7ef8e83a
+ * Prisma Client JS version: 6.18.0
+ * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
  */
 Prisma.prismaVersion = {
-  client: "6.16.3",
-  engine: "bb420e667c1820a8c05a38023385f6cc7ef8e83a"
+  client: "6.18.0",
+  engine: "34b5a692b7bd79939a9a2c3ef97d816e749cda2f"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -137,11 +137,19 @@ exports.Prisma.EnterpriseScalarFieldEnum = {
   entName: 'entName',
   entAddr: 'entAddr',
   entPhone: 'entPhone',
-  retPerc: 'retPerc'
+  deducPerc: 'deducPerc'
+};
+
+exports.Prisma.SerialTrackerScalarFieldEnum = {
+  id: 'id',
+  enterpId: 'enterpId',
+  serial: 'serial',
+  updateAt: 'updateAt'
 };
 
 exports.Prisma.InvoiceScalarFieldEnum = {
   id: 'id',
+  enterpId: 'enterpId',
   userId: 'userId',
   vendRif: 'vendRif',
   vendName: 'vendName',
@@ -150,13 +158,18 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   rcptNum: 'rcptNum',
   rcptName: 'rcptName',
   rcptUrl: 'rcptUrl',
+  debNote: 'debNote',
+  credNote: 'credNote',
+  affecNum: 'affecNum',
+  vatFree: 'vatFree',
   ctrlNum: 'ctrlNum',
   taxBase: 'taxBase',
   vatPerc: 'vatPerc',
   total: 'total',
   excel: 'excel',
   sentTo: 'sentTo',
-  emission: 'emission'
+  emission: 'emission',
+  serial: 'serial'
 };
 
 exports.Prisma.ContactScalarFieldEnum = {
@@ -181,6 +194,7 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   Enterprise: 'Enterprise',
+  SerialTracker: 'SerialTracker',
   Invoice: 'Invoice',
   Contact: 'Contact'
 };

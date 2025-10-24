@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.3
- * Query Engine version: bb420e667c1820a8c05a38023385f6cc7ef8e83a
+ * Prisma Client JS version: 6.18.0
+ * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
  */
 Prisma.prismaVersion = {
-  client: "6.16.3",
-  engine: "bb420e667c1820a8c05a38023385f6cc7ef8e83a"
+  client: "6.18.0",
+  engine: "34b5a692b7bd79939a9a2c3ef97d816e749cda2f"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -109,11 +109,19 @@ exports.Prisma.EnterpriseScalarFieldEnum = {
   entName: 'entName',
   entAddr: 'entAddr',
   entPhone: 'entPhone',
-  retPerc: 'retPerc'
+  deducPerc: 'deducPerc'
+};
+
+exports.Prisma.SerialTrackerScalarFieldEnum = {
+  id: 'id',
+  enterpId: 'enterpId',
+  serial: 'serial',
+  updateAt: 'updateAt'
 };
 
 exports.Prisma.InvoiceScalarFieldEnum = {
   id: 'id',
+  enterpId: 'enterpId',
   userId: 'userId',
   vendRif: 'vendRif',
   vendName: 'vendName',
@@ -122,13 +130,18 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   rcptNum: 'rcptNum',
   rcptName: 'rcptName',
   rcptUrl: 'rcptUrl',
+  debNote: 'debNote',
+  credNote: 'credNote',
+  affecNum: 'affecNum',
+  vatFree: 'vatFree',
   ctrlNum: 'ctrlNum',
   taxBase: 'taxBase',
   vatPerc: 'vatPerc',
   total: 'total',
   excel: 'excel',
   sentTo: 'sentTo',
-  emission: 'emission'
+  emission: 'emission',
+  serial: 'serial'
 };
 
 exports.Prisma.ContactScalarFieldEnum = {
@@ -153,6 +166,7 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   Enterprise: 'Enterprise',
+  SerialTracker: 'SerialTracker',
   Invoice: 'Invoice',
   Contact: 'Contact'
 };
@@ -187,17 +201,17 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../../..",
-  "clientVersion": "6.16.3",
-  "engineVersion": "bb420e667c1820a8c05a38023385f6cc7ef8e83a",
+  "clientVersion": "6.18.0",
+  "engineVersion": "34b5a692b7bd79939a9a2c3ef97d816e749cda2f",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -206,15 +220,22 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"./src/generated/prisma\"\n  previewFeatures = [\"postgresqlExtensions\"]\n}\n\ndatasource db {\n  provider   = \"postgresql\"\n  url        = env(\"DATABASE_URL\")\n  extensions = [pgcrypto]\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  username  String    @unique\n  firstName String    @map(\"first_name\")\n  lastName  String    @map(\"last_name\")\n  isAdmin   Boolean   @default(false) @map(\"is_admin\")\n  email     String    @unique @map(\"email\")\n  password  String    @map(\"password\")\n  madeAt    DateTime  @default(now()) @map(\"made_at\")\n  invoices  Invoice[]\n}\n\nmodel Enterprise {\n  id       Int     @id @default(autoincrement())\n  entRif   String  @unique @map(\"ent_rif\")\n  entName  String  @map(\"ent_name\")\n  entAddr  String  @map(\"ent_address\")\n  entPhone String  @map(\"ent_phone_number\")\n  retPerc  Boolean @default(false) @map(\"retention_percentage\")\n}\n\nmodel Invoice {\n  id        Int      @id @default(autoincrement())\n  userId    Int      @map(\"user_id\")\n  vendRif   String   @map(\"vendor_rif\")\n  vendName  String   @map(\"vendor_name\")\n  vendAddr  String   @map(\"vendor_address\")\n  vendPhone String   @map(\"vendor_phone_number\")\n  rcptNum   Int      @map(\"receipt_number\")\n  rcptName  String   @map(\"receipt_file_name\")\n  rcptUrl   String   @map(\"receipt_file_url\")\n  ctrlNum   Int      @map(\"control_number\")\n  taxBase   Decimal  @map(\"taxable_base\")\n  vatPerc   Int      @map(\"vat_percentage\")\n  total     Decimal  @map(\"total\")\n  excel     String   @map(\"excel_file\")\n  sentTo    String   @map(\"sent_to\")\n  emission  DateTime @default(now()) @map(\"emitted_at\")\n  user      User     @relation(fields: [userId], references: [id])\n}\n\nmodel Contact {\n  id        Int     @id @default(autoincrement())\n  contType  Boolean @default(false) @map(\"contact_type\")\n  contName  String  @unique @map(\"contact_name\")\n  contEmail String  @unique @map(\"contact_email\")\n  contPhone String  @map(\"contact_phone_number\")\n}\n",
-  "inlineSchemaHash": "fd76a137bca98c2afb46a3c7a660f75de97caca7e92f6668d056f36356944073",
-  "copyEngine": false
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"./src/generated/prisma\"\n  previewFeatures = [\"postgresqlExtensions\"]\n}\n\ndatasource db {\n  provider   = \"postgresql\"\n  url        = env(\"DATABASE_URL\")\n  extensions = [pgcrypto]\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  username  String    @unique\n  firstName String    @map(\"first_name\")\n  lastName  String    @map(\"last_name\")\n  isAdmin   Boolean   @default(false) @map(\"is_admin\")\n  email     String    @unique @map(\"email\")\n  password  String    @map(\"password\")\n  madeAt    DateTime  @default(now()) @map(\"made_at\")\n  invoices  Invoice[]\n}\n\nmodel Enterprise {\n  id        Int            @id @default(autoincrement())\n  entRif    String         @unique @map(\"ent_rif\")\n  entName   String         @map(\"ent_name\")\n  entAddr   String         @map(\"ent_address\")\n  entPhone  String         @map(\"ent_phone_number\")\n  deducPerc Boolean        @default(false) @map(\"retention_percentage\")\n  invoices  Invoice[]\n  serials   SerialTracker?\n}\n\nmodel SerialTracker {\n  id       Int      @id @default(autoincrement())\n  enterpId Int      @unique @map(\"enterprise_id\")\n  serial   Int      @default(0) @map(\"current_serial\")\n  updateAt DateTime @map(\"updated_at\")\n\n  enterprise Enterprise @relation(fields: [enterpId], references: [id])\n}\n\nmodel Invoice {\n  id        Int      @id @default(autoincrement())\n  enterpId  Int      @unique @map(\"enterprise_id\")\n  userId    Int      @map(\"user_id\")\n  vendRif   String   @map(\"vendor_rif\")\n  vendName  String   @map(\"vendor_name\")\n  vendAddr  String   @map(\"vendor_address\")\n  vendPhone String   @map(\"vendor_phone_number\")\n  rcptNum   Int      @map(\"receipt_number\")\n  rcptName  String   @map(\"receipt_file_name\")\n  rcptUrl   String   @map(\"receipt_file_url\")\n  debNote   Decimal  @map(\"debit_note\")\n  credNote  Decimal  @map(\"credit_note\")\n  affecNum  Int      @map(\"affected_receipt_num\")\n  vatFree   Decimal  @map(\"vat_free_amount\")\n  ctrlNum   Int      @map(\"control_number\")\n  taxBase   Decimal  @map(\"taxable_base\")\n  vatPerc   Int      @map(\"vat_percentage\")\n  total     Decimal  @map(\"total\")\n  excel     String   @map(\"excel_file\")\n  sentTo    String   @map(\"sent_to\")\n  emission  DateTime @default(now()) @map(\"emitted_at\")\n  serial    Int      @unique @map(\"serial\")\n\n  user       User       @relation(fields: [userId], references: [id])\n  enterprise Enterprise @relation(fields: [enterpId], references: [id])\n}\n\nmodel Contact {\n  id        Int     @id @default(autoincrement())\n  contType  Boolean @default(false) @map(\"contact_type\")\n  contName  String  @unique @map(\"contact_name\")\n  contEmail String  @unique @map(\"contact_email\")\n  contPhone String  @map(\"contact_phone_number\")\n}\n",
+  "inlineSchemaHash": "979f3f970d9c0faaddf2b611f9ee40dab9606409ca4d5b60a8a4b7ba030382b3",
+  "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"first_name\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"last_name\"},{\"name\":\"isAdmin\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_admin\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"email\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"password\"},{\"name\":\"madeAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"made_at\"},{\"name\":\"invoices\",\"kind\":\"object\",\"type\":\"Invoice\",\"relationName\":\"InvoiceToUser\"}],\"dbName\":null},\"Enterprise\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"entRif\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_rif\"},{\"name\":\"entName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_name\"},{\"name\":\"entAddr\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_address\"},{\"name\":\"entPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_phone_number\"},{\"name\":\"retPerc\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"retention_percentage\"}],\"dbName\":null},\"Invoice\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"user_id\"},{\"name\":\"vendRif\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_rif\"},{\"name\":\"vendName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_name\"},{\"name\":\"vendAddr\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_address\"},{\"name\":\"vendPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_phone_number\"},{\"name\":\"rcptNum\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"receipt_number\"},{\"name\":\"rcptName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"receipt_file_name\"},{\"name\":\"rcptUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"receipt_file_url\"},{\"name\":\"ctrlNum\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"control_number\"},{\"name\":\"taxBase\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"taxable_base\"},{\"name\":\"vatPerc\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"vat_percentage\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"total\"},{\"name\":\"excel\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"excel_file\"},{\"name\":\"sentTo\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"sent_to\"},{\"name\":\"emission\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"emitted_at\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"InvoiceToUser\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"contType\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"contact_type\"},{\"name\":\"contName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_name\"},{\"name\":\"contEmail\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_email\"},{\"name\":\"contPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_phone_number\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"first_name\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"last_name\"},{\"name\":\"isAdmin\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_admin\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"email\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"password\"},{\"name\":\"madeAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"made_at\"},{\"name\":\"invoices\",\"kind\":\"object\",\"type\":\"Invoice\",\"relationName\":\"InvoiceToUser\"}],\"dbName\":null},\"Enterprise\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"entRif\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_rif\"},{\"name\":\"entName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_name\"},{\"name\":\"entAddr\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_address\"},{\"name\":\"entPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ent_phone_number\"},{\"name\":\"deducPerc\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"retention_percentage\"},{\"name\":\"invoices\",\"kind\":\"object\",\"type\":\"Invoice\",\"relationName\":\"EnterpriseToInvoice\"},{\"name\":\"serials\",\"kind\":\"object\",\"type\":\"SerialTracker\",\"relationName\":\"EnterpriseToSerialTracker\"}],\"dbName\":null},\"SerialTracker\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"enterpId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"enterprise_id\"},{\"name\":\"serial\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"current_serial\"},{\"name\":\"updateAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"enterprise\",\"kind\":\"object\",\"type\":\"Enterprise\",\"relationName\":\"EnterpriseToSerialTracker\"}],\"dbName\":null},\"Invoice\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"enterpId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"enterprise_id\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"user_id\"},{\"name\":\"vendRif\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_rif\"},{\"name\":\"vendName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_name\"},{\"name\":\"vendAddr\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_address\"},{\"name\":\"vendPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"vendor_phone_number\"},{\"name\":\"rcptNum\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"receipt_number\"},{\"name\":\"rcptName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"receipt_file_name\"},{\"name\":\"rcptUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"receipt_file_url\"},{\"name\":\"debNote\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"debit_note\"},{\"name\":\"credNote\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"credit_note\"},{\"name\":\"affecNum\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"affected_receipt_num\"},{\"name\":\"vatFree\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"vat_free_amount\"},{\"name\":\"ctrlNum\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"control_number\"},{\"name\":\"taxBase\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"taxable_base\"},{\"name\":\"vatPerc\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"vat_percentage\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"total\"},{\"name\":\"excel\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"excel_file\"},{\"name\":\"sentTo\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"sent_to\"},{\"name\":\"emission\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"emitted_at\"},{\"name\":\"serial\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"serial\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"InvoiceToUser\"},{\"name\":\"enterprise\",\"kind\":\"object\",\"type\":\"Enterprise\",\"relationName\":\"EnterpriseToInvoice\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"contType\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"contact_type\"},{\"name\":\"contName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_name\"},{\"name\":\"contEmail\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_email\"},{\"name\":\"contPhone\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"contact_phone_number\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
-config.engineWasm = undefined
+config.engineWasm = {
+  getRuntime: async () => require('./query_engine_bg.js'),
+  getQueryEngineWasmModule: async () => {
+    const loader = (await import('#wasm-engine-loader')).default
+    const engine = (await loader).default
+    return engine
+  }
+}
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({

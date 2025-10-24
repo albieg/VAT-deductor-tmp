@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Enterprise = $Result.DefaultSelection<Prisma.$EnterprisePayload>
 /**
+ * Model SerialTracker
+ * 
+ */
+export type SerialTracker = $Result.DefaultSelection<Prisma.$SerialTrackerPayload>
+/**
  * Model Invoice
  * 
  */
@@ -173,6 +178,16 @@ export class PrismaClient<
   get enterprise(): Prisma.EnterpriseDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.serialTracker`: Exposes CRUD operations for the **SerialTracker** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SerialTrackers
+    * const serialTrackers = await prisma.serialTracker.findMany()
+    * ```
+    */
+  get serialTracker(): Prisma.SerialTrackerDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.invoice`: Exposes CRUD operations for the **Invoice** model.
     * Example usage:
     * ```ts
@@ -249,8 +264,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.16.3
-   * Query Engine version: bb420e667c1820a8c05a38023385f6cc7ef8e83a
+   * Prisma Client JS version: 6.18.0
+   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
    */
   export type PrismaVersion = {
     client: string
@@ -263,6 +278,7 @@ export namespace Prisma {
    */
 
 
+  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -633,6 +649,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Enterprise: 'Enterprise',
+    SerialTracker: 'SerialTracker',
     Invoice: 'Invoice',
     Contact: 'Contact'
   };
@@ -653,7 +670,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "enterprise" | "invoice" | "contact"
+      modelProps: "user" | "enterprise" | "serialTracker" | "invoice" | "contact"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -802,6 +819,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EnterpriseCountArgs<ExtArgs>
             result: $Utils.Optional<EnterpriseCountAggregateOutputType> | number
+          }
+        }
+      }
+      SerialTracker: {
+        payload: Prisma.$SerialTrackerPayload<ExtArgs>
+        fields: Prisma.SerialTrackerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SerialTrackerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SerialTrackerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          findFirst: {
+            args: Prisma.SerialTrackerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SerialTrackerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          findMany: {
+            args: Prisma.SerialTrackerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>[]
+          }
+          create: {
+            args: Prisma.SerialTrackerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          createMany: {
+            args: Prisma.SerialTrackerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SerialTrackerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>[]
+          }
+          delete: {
+            args: Prisma.SerialTrackerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          update: {
+            args: Prisma.SerialTrackerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          deleteMany: {
+            args: Prisma.SerialTrackerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SerialTrackerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SerialTrackerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>[]
+          }
+          upsert: {
+            args: Prisma.SerialTrackerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SerialTrackerPayload>
+          }
+          aggregate: {
+            args: Prisma.SerialTrackerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSerialTracker>
+          }
+          groupBy: {
+            args: Prisma.SerialTrackerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SerialTrackerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SerialTrackerCountArgs<ExtArgs>
+            result: $Utils.Optional<SerialTrackerCountAggregateOutputType> | number
           }
         }
       }
@@ -1051,6 +1142,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     enterprise?: EnterpriseOmit
+    serialTracker?: SerialTrackerOmit
     invoice?: InvoiceOmit
     contact?: ContactOmit
   }
@@ -1155,6 +1247,37 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
+
+  /**
+   * Count Type EnterpriseCountOutputType
+   */
+
+  export type EnterpriseCountOutputType = {
+    invoices: number
+  }
+
+  export type EnterpriseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoices?: boolean | EnterpriseCountOutputTypeCountInvoicesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EnterpriseCountOutputType without action
+   */
+  export type EnterpriseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnterpriseCountOutputType
+     */
+    select?: EnterpriseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EnterpriseCountOutputType without action
+   */
+  export type EnterpriseCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InvoiceWhereInput
   }
 
@@ -2332,7 +2455,7 @@ export namespace Prisma {
     entName: string | null
     entAddr: string | null
     entPhone: string | null
-    retPerc: boolean | null
+    deducPerc: boolean | null
   }
 
   export type EnterpriseMaxAggregateOutputType = {
@@ -2341,7 +2464,7 @@ export namespace Prisma {
     entName: string | null
     entAddr: string | null
     entPhone: string | null
-    retPerc: boolean | null
+    deducPerc: boolean | null
   }
 
   export type EnterpriseCountAggregateOutputType = {
@@ -2350,7 +2473,7 @@ export namespace Prisma {
     entName: number
     entAddr: number
     entPhone: number
-    retPerc: number
+    deducPerc: number
     _all: number
   }
 
@@ -2369,7 +2492,7 @@ export namespace Prisma {
     entName?: true
     entAddr?: true
     entPhone?: true
-    retPerc?: true
+    deducPerc?: true
   }
 
   export type EnterpriseMaxAggregateInputType = {
@@ -2378,7 +2501,7 @@ export namespace Prisma {
     entName?: true
     entAddr?: true
     entPhone?: true
-    retPerc?: true
+    deducPerc?: true
   }
 
   export type EnterpriseCountAggregateInputType = {
@@ -2387,7 +2510,7 @@ export namespace Prisma {
     entName?: true
     entAddr?: true
     entPhone?: true
-    retPerc?: true
+    deducPerc?: true
     _all?: true
   }
 
@@ -2483,7 +2606,7 @@ export namespace Prisma {
     entName: string
     entAddr: string
     entPhone: string
-    retPerc: boolean
+    deducPerc: boolean
     _count: EnterpriseCountAggregateOutputType | null
     _avg: EnterpriseAvgAggregateOutputType | null
     _sum: EnterpriseSumAggregateOutputType | null
@@ -2511,7 +2634,10 @@ export namespace Prisma {
     entName?: boolean
     entAddr?: boolean
     entPhone?: boolean
-    retPerc?: boolean
+    deducPerc?: boolean
+    invoices?: boolean | Enterprise$invoicesArgs<ExtArgs>
+    serials?: boolean | Enterprise$serialsArgs<ExtArgs>
+    _count?: boolean | EnterpriseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["enterprise"]>
 
   export type EnterpriseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2520,7 +2646,7 @@ export namespace Prisma {
     entName?: boolean
     entAddr?: boolean
     entPhone?: boolean
-    retPerc?: boolean
+    deducPerc?: boolean
   }, ExtArgs["result"]["enterprise"]>
 
   export type EnterpriseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2529,7 +2655,7 @@ export namespace Prisma {
     entName?: boolean
     entAddr?: boolean
     entPhone?: boolean
-    retPerc?: boolean
+    deducPerc?: boolean
   }, ExtArgs["result"]["enterprise"]>
 
   export type EnterpriseSelectScalar = {
@@ -2538,21 +2664,31 @@ export namespace Prisma {
     entName?: boolean
     entAddr?: boolean
     entPhone?: boolean
-    retPerc?: boolean
+    deducPerc?: boolean
   }
 
-  export type EnterpriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "entRif" | "entName" | "entAddr" | "entPhone" | "retPerc", ExtArgs["result"]["enterprise"]>
+  export type EnterpriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "entRif" | "entName" | "entAddr" | "entPhone" | "deducPerc", ExtArgs["result"]["enterprise"]>
+  export type EnterpriseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoices?: boolean | Enterprise$invoicesArgs<ExtArgs>
+    serials?: boolean | Enterprise$serialsArgs<ExtArgs>
+    _count?: boolean | EnterpriseCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EnterpriseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EnterpriseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $EnterprisePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Enterprise"
-    objects: {}
+    objects: {
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+      serials: Prisma.$SerialTrackerPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       entRif: string
       entName: string
       entAddr: string
       entPhone: string
-      retPerc: boolean
+      deducPerc: boolean
     }, ExtArgs["result"]["enterprise"]>
     composites: {}
   }
@@ -2947,6 +3083,8 @@ export namespace Prisma {
    */
   export interface Prisma__EnterpriseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    invoices<T extends Enterprise$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Enterprise$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    serials<T extends Enterprise$serialsArgs<ExtArgs> = {}>(args?: Subset<T, Enterprise$serialsArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2981,7 +3119,7 @@ export namespace Prisma {
     readonly entName: FieldRef<"Enterprise", 'String'>
     readonly entAddr: FieldRef<"Enterprise", 'String'>
     readonly entPhone: FieldRef<"Enterprise", 'String'>
-    readonly retPerc: FieldRef<"Enterprise", 'Boolean'>
+    readonly deducPerc: FieldRef<"Enterprise", 'Boolean'>
   }
     
 
@@ -2998,6 +3136,10 @@ export namespace Prisma {
      * Omit specific fields from the Enterprise
      */
     omit?: EnterpriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
     /**
      * Filter, which Enterprise to fetch.
      */
@@ -3017,6 +3159,10 @@ export namespace Prisma {
      */
     omit?: EnterpriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+    /**
      * Filter, which Enterprise to fetch.
      */
     where: EnterpriseWhereUniqueInput
@@ -3034,6 +3180,10 @@ export namespace Prisma {
      * Omit specific fields from the Enterprise
      */
     omit?: EnterpriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
     /**
      * Filter, which Enterprise to fetch.
      */
@@ -3083,6 +3233,10 @@ export namespace Prisma {
      */
     omit?: EnterpriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+    /**
      * Filter, which Enterprise to fetch.
      */
     where?: EnterpriseWhereInput
@@ -3131,6 +3285,10 @@ export namespace Prisma {
      */
     omit?: EnterpriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+    /**
      * Filter, which Enterprises to fetch.
      */
     where?: EnterpriseWhereInput
@@ -3173,6 +3331,10 @@ export namespace Prisma {
      * Omit specific fields from the Enterprise
      */
     omit?: EnterpriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
     /**
      * The data needed to create a Enterprise.
      */
@@ -3221,6 +3383,10 @@ export namespace Prisma {
      * Omit specific fields from the Enterprise
      */
     omit?: EnterpriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
     /**
      * The data needed to update a Enterprise.
      */
@@ -3288,6 +3454,10 @@ export namespace Prisma {
      */
     omit?: EnterpriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+    /**
      * The filter to search for the Enterprise to update in case it exists.
      */
     where: EnterpriseWhereUniqueInput
@@ -3314,6 +3484,10 @@ export namespace Prisma {
      */
     omit?: EnterpriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+    /**
      * Filter which Enterprise to delete.
      */
     where: EnterpriseWhereUniqueInput
@@ -3334,6 +3508,49 @@ export namespace Prisma {
   }
 
   /**
+   * Enterprise.invoices
+   */
+  export type Enterprise$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Enterprise.serials
+   */
+  export type Enterprise$serialsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    where?: SerialTrackerWhereInput
+  }
+
+  /**
    * Enterprise without action
    */
   export type EnterpriseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3345,6 +3562,1097 @@ export namespace Prisma {
      * Omit specific fields from the Enterprise
      */
     omit?: EnterpriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnterpriseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SerialTracker
+   */
+
+  export type AggregateSerialTracker = {
+    _count: SerialTrackerCountAggregateOutputType | null
+    _avg: SerialTrackerAvgAggregateOutputType | null
+    _sum: SerialTrackerSumAggregateOutputType | null
+    _min: SerialTrackerMinAggregateOutputType | null
+    _max: SerialTrackerMaxAggregateOutputType | null
+  }
+
+  export type SerialTrackerAvgAggregateOutputType = {
+    id: number | null
+    enterpId: number | null
+    serial: number | null
+  }
+
+  export type SerialTrackerSumAggregateOutputType = {
+    id: number | null
+    enterpId: number | null
+    serial: number | null
+  }
+
+  export type SerialTrackerMinAggregateOutputType = {
+    id: number | null
+    enterpId: number | null
+    serial: number | null
+    updateAt: Date | null
+  }
+
+  export type SerialTrackerMaxAggregateOutputType = {
+    id: number | null
+    enterpId: number | null
+    serial: number | null
+    updateAt: Date | null
+  }
+
+  export type SerialTrackerCountAggregateOutputType = {
+    id: number
+    enterpId: number
+    serial: number
+    updateAt: number
+    _all: number
+  }
+
+
+  export type SerialTrackerAvgAggregateInputType = {
+    id?: true
+    enterpId?: true
+    serial?: true
+  }
+
+  export type SerialTrackerSumAggregateInputType = {
+    id?: true
+    enterpId?: true
+    serial?: true
+  }
+
+  export type SerialTrackerMinAggregateInputType = {
+    id?: true
+    enterpId?: true
+    serial?: true
+    updateAt?: true
+  }
+
+  export type SerialTrackerMaxAggregateInputType = {
+    id?: true
+    enterpId?: true
+    serial?: true
+    updateAt?: true
+  }
+
+  export type SerialTrackerCountAggregateInputType = {
+    id?: true
+    enterpId?: true
+    serial?: true
+    updateAt?: true
+    _all?: true
+  }
+
+  export type SerialTrackerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SerialTracker to aggregate.
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SerialTrackers to fetch.
+     */
+    orderBy?: SerialTrackerOrderByWithRelationInput | SerialTrackerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SerialTrackerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SerialTrackers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SerialTrackers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SerialTrackers
+    **/
+    _count?: true | SerialTrackerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SerialTrackerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SerialTrackerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SerialTrackerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SerialTrackerMaxAggregateInputType
+  }
+
+  export type GetSerialTrackerAggregateType<T extends SerialTrackerAggregateArgs> = {
+        [P in keyof T & keyof AggregateSerialTracker]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSerialTracker[P]>
+      : GetScalarType<T[P], AggregateSerialTracker[P]>
+  }
+
+
+
+
+  export type SerialTrackerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SerialTrackerWhereInput
+    orderBy?: SerialTrackerOrderByWithAggregationInput | SerialTrackerOrderByWithAggregationInput[]
+    by: SerialTrackerScalarFieldEnum[] | SerialTrackerScalarFieldEnum
+    having?: SerialTrackerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SerialTrackerCountAggregateInputType | true
+    _avg?: SerialTrackerAvgAggregateInputType
+    _sum?: SerialTrackerSumAggregateInputType
+    _min?: SerialTrackerMinAggregateInputType
+    _max?: SerialTrackerMaxAggregateInputType
+  }
+
+  export type SerialTrackerGroupByOutputType = {
+    id: number
+    enterpId: number
+    serial: number
+    updateAt: Date
+    _count: SerialTrackerCountAggregateOutputType | null
+    _avg: SerialTrackerAvgAggregateOutputType | null
+    _sum: SerialTrackerSumAggregateOutputType | null
+    _min: SerialTrackerMinAggregateOutputType | null
+    _max: SerialTrackerMaxAggregateOutputType | null
+  }
+
+  type GetSerialTrackerGroupByPayload<T extends SerialTrackerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SerialTrackerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SerialTrackerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SerialTrackerGroupByOutputType[P]>
+            : GetScalarType<T[P], SerialTrackerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SerialTrackerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    enterpId?: boolean
+    serial?: boolean
+    updateAt?: boolean
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["serialTracker"]>
+
+  export type SerialTrackerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    enterpId?: boolean
+    serial?: boolean
+    updateAt?: boolean
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["serialTracker"]>
+
+  export type SerialTrackerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    enterpId?: boolean
+    serial?: boolean
+    updateAt?: boolean
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["serialTracker"]>
+
+  export type SerialTrackerSelectScalar = {
+    id?: boolean
+    enterpId?: boolean
+    serial?: boolean
+    updateAt?: boolean
+  }
+
+  export type SerialTrackerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "enterpId" | "serial" | "updateAt", ExtArgs["result"]["serialTracker"]>
+  export type SerialTrackerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }
+  export type SerialTrackerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }
+  export type SerialTrackerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
+  }
+
+  export type $SerialTrackerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SerialTracker"
+    objects: {
+      enterprise: Prisma.$EnterprisePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      enterpId: number
+      serial: number
+      updateAt: Date
+    }, ExtArgs["result"]["serialTracker"]>
+    composites: {}
+  }
+
+  type SerialTrackerGetPayload<S extends boolean | null | undefined | SerialTrackerDefaultArgs> = $Result.GetResult<Prisma.$SerialTrackerPayload, S>
+
+  type SerialTrackerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SerialTrackerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SerialTrackerCountAggregateInputType | true
+    }
+
+  export interface SerialTrackerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SerialTracker'], meta: { name: 'SerialTracker' } }
+    /**
+     * Find zero or one SerialTracker that matches the filter.
+     * @param {SerialTrackerFindUniqueArgs} args - Arguments to find a SerialTracker
+     * @example
+     * // Get one SerialTracker
+     * const serialTracker = await prisma.serialTracker.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SerialTrackerFindUniqueArgs>(args: SelectSubset<T, SerialTrackerFindUniqueArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SerialTracker that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SerialTrackerFindUniqueOrThrowArgs} args - Arguments to find a SerialTracker
+     * @example
+     * // Get one SerialTracker
+     * const serialTracker = await prisma.serialTracker.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SerialTrackerFindUniqueOrThrowArgs>(args: SelectSubset<T, SerialTrackerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SerialTracker that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerFindFirstArgs} args - Arguments to find a SerialTracker
+     * @example
+     * // Get one SerialTracker
+     * const serialTracker = await prisma.serialTracker.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SerialTrackerFindFirstArgs>(args?: SelectSubset<T, SerialTrackerFindFirstArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SerialTracker that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerFindFirstOrThrowArgs} args - Arguments to find a SerialTracker
+     * @example
+     * // Get one SerialTracker
+     * const serialTracker = await prisma.serialTracker.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SerialTrackerFindFirstOrThrowArgs>(args?: SelectSubset<T, SerialTrackerFindFirstOrThrowArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SerialTrackers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SerialTrackers
+     * const serialTrackers = await prisma.serialTracker.findMany()
+     * 
+     * // Get first 10 SerialTrackers
+     * const serialTrackers = await prisma.serialTracker.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const serialTrackerWithIdOnly = await prisma.serialTracker.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SerialTrackerFindManyArgs>(args?: SelectSubset<T, SerialTrackerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SerialTracker.
+     * @param {SerialTrackerCreateArgs} args - Arguments to create a SerialTracker.
+     * @example
+     * // Create one SerialTracker
+     * const SerialTracker = await prisma.serialTracker.create({
+     *   data: {
+     *     // ... data to create a SerialTracker
+     *   }
+     * })
+     * 
+     */
+    create<T extends SerialTrackerCreateArgs>(args: SelectSubset<T, SerialTrackerCreateArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SerialTrackers.
+     * @param {SerialTrackerCreateManyArgs} args - Arguments to create many SerialTrackers.
+     * @example
+     * // Create many SerialTrackers
+     * const serialTracker = await prisma.serialTracker.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SerialTrackerCreateManyArgs>(args?: SelectSubset<T, SerialTrackerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SerialTrackers and returns the data saved in the database.
+     * @param {SerialTrackerCreateManyAndReturnArgs} args - Arguments to create many SerialTrackers.
+     * @example
+     * // Create many SerialTrackers
+     * const serialTracker = await prisma.serialTracker.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SerialTrackers and only return the `id`
+     * const serialTrackerWithIdOnly = await prisma.serialTracker.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SerialTrackerCreateManyAndReturnArgs>(args?: SelectSubset<T, SerialTrackerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SerialTracker.
+     * @param {SerialTrackerDeleteArgs} args - Arguments to delete one SerialTracker.
+     * @example
+     * // Delete one SerialTracker
+     * const SerialTracker = await prisma.serialTracker.delete({
+     *   where: {
+     *     // ... filter to delete one SerialTracker
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SerialTrackerDeleteArgs>(args: SelectSubset<T, SerialTrackerDeleteArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SerialTracker.
+     * @param {SerialTrackerUpdateArgs} args - Arguments to update one SerialTracker.
+     * @example
+     * // Update one SerialTracker
+     * const serialTracker = await prisma.serialTracker.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SerialTrackerUpdateArgs>(args: SelectSubset<T, SerialTrackerUpdateArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SerialTrackers.
+     * @param {SerialTrackerDeleteManyArgs} args - Arguments to filter SerialTrackers to delete.
+     * @example
+     * // Delete a few SerialTrackers
+     * const { count } = await prisma.serialTracker.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SerialTrackerDeleteManyArgs>(args?: SelectSubset<T, SerialTrackerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SerialTrackers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SerialTrackers
+     * const serialTracker = await prisma.serialTracker.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SerialTrackerUpdateManyArgs>(args: SelectSubset<T, SerialTrackerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SerialTrackers and returns the data updated in the database.
+     * @param {SerialTrackerUpdateManyAndReturnArgs} args - Arguments to update many SerialTrackers.
+     * @example
+     * // Update many SerialTrackers
+     * const serialTracker = await prisma.serialTracker.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SerialTrackers and only return the `id`
+     * const serialTrackerWithIdOnly = await prisma.serialTracker.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SerialTrackerUpdateManyAndReturnArgs>(args: SelectSubset<T, SerialTrackerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SerialTracker.
+     * @param {SerialTrackerUpsertArgs} args - Arguments to update or create a SerialTracker.
+     * @example
+     * // Update or create a SerialTracker
+     * const serialTracker = await prisma.serialTracker.upsert({
+     *   create: {
+     *     // ... data to create a SerialTracker
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SerialTracker we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SerialTrackerUpsertArgs>(args: SelectSubset<T, SerialTrackerUpsertArgs<ExtArgs>>): Prisma__SerialTrackerClient<$Result.GetResult<Prisma.$SerialTrackerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SerialTrackers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerCountArgs} args - Arguments to filter SerialTrackers to count.
+     * @example
+     * // Count the number of SerialTrackers
+     * const count = await prisma.serialTracker.count({
+     *   where: {
+     *     // ... the filter for the SerialTrackers we want to count
+     *   }
+     * })
+    **/
+    count<T extends SerialTrackerCountArgs>(
+      args?: Subset<T, SerialTrackerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SerialTrackerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SerialTracker.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SerialTrackerAggregateArgs>(args: Subset<T, SerialTrackerAggregateArgs>): Prisma.PrismaPromise<GetSerialTrackerAggregateType<T>>
+
+    /**
+     * Group by SerialTracker.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SerialTrackerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SerialTrackerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SerialTrackerGroupByArgs['orderBy'] }
+        : { orderBy?: SerialTrackerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SerialTrackerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSerialTrackerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SerialTracker model
+   */
+  readonly fields: SerialTrackerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SerialTracker.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SerialTrackerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    enterprise<T extends EnterpriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EnterpriseDefaultArgs<ExtArgs>>): Prisma__EnterpriseClient<$Result.GetResult<Prisma.$EnterprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SerialTracker model
+   */
+  interface SerialTrackerFieldRefs {
+    readonly id: FieldRef<"SerialTracker", 'Int'>
+    readonly enterpId: FieldRef<"SerialTracker", 'Int'>
+    readonly serial: FieldRef<"SerialTracker", 'Int'>
+    readonly updateAt: FieldRef<"SerialTracker", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SerialTracker findUnique
+   */
+  export type SerialTrackerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter, which SerialTracker to fetch.
+     */
+    where: SerialTrackerWhereUniqueInput
+  }
+
+  /**
+   * SerialTracker findUniqueOrThrow
+   */
+  export type SerialTrackerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter, which SerialTracker to fetch.
+     */
+    where: SerialTrackerWhereUniqueInput
+  }
+
+  /**
+   * SerialTracker findFirst
+   */
+  export type SerialTrackerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter, which SerialTracker to fetch.
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SerialTrackers to fetch.
+     */
+    orderBy?: SerialTrackerOrderByWithRelationInput | SerialTrackerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SerialTrackers.
+     */
+    cursor?: SerialTrackerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SerialTrackers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SerialTrackers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SerialTrackers.
+     */
+    distinct?: SerialTrackerScalarFieldEnum | SerialTrackerScalarFieldEnum[]
+  }
+
+  /**
+   * SerialTracker findFirstOrThrow
+   */
+  export type SerialTrackerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter, which SerialTracker to fetch.
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SerialTrackers to fetch.
+     */
+    orderBy?: SerialTrackerOrderByWithRelationInput | SerialTrackerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SerialTrackers.
+     */
+    cursor?: SerialTrackerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SerialTrackers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SerialTrackers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SerialTrackers.
+     */
+    distinct?: SerialTrackerScalarFieldEnum | SerialTrackerScalarFieldEnum[]
+  }
+
+  /**
+   * SerialTracker findMany
+   */
+  export type SerialTrackerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter, which SerialTrackers to fetch.
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SerialTrackers to fetch.
+     */
+    orderBy?: SerialTrackerOrderByWithRelationInput | SerialTrackerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SerialTrackers.
+     */
+    cursor?: SerialTrackerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SerialTrackers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SerialTrackers.
+     */
+    skip?: number
+    distinct?: SerialTrackerScalarFieldEnum | SerialTrackerScalarFieldEnum[]
+  }
+
+  /**
+   * SerialTracker create
+   */
+  export type SerialTrackerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SerialTracker.
+     */
+    data: XOR<SerialTrackerCreateInput, SerialTrackerUncheckedCreateInput>
+  }
+
+  /**
+   * SerialTracker createMany
+   */
+  export type SerialTrackerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SerialTrackers.
+     */
+    data: SerialTrackerCreateManyInput | SerialTrackerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SerialTracker createManyAndReturn
+   */
+  export type SerialTrackerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * The data used to create many SerialTrackers.
+     */
+    data: SerialTrackerCreateManyInput | SerialTrackerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SerialTracker update
+   */
+  export type SerialTrackerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SerialTracker.
+     */
+    data: XOR<SerialTrackerUpdateInput, SerialTrackerUncheckedUpdateInput>
+    /**
+     * Choose, which SerialTracker to update.
+     */
+    where: SerialTrackerWhereUniqueInput
+  }
+
+  /**
+   * SerialTracker updateMany
+   */
+  export type SerialTrackerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SerialTrackers.
+     */
+    data: XOR<SerialTrackerUpdateManyMutationInput, SerialTrackerUncheckedUpdateManyInput>
+    /**
+     * Filter which SerialTrackers to update
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * Limit how many SerialTrackers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SerialTracker updateManyAndReturn
+   */
+  export type SerialTrackerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * The data used to update SerialTrackers.
+     */
+    data: XOR<SerialTrackerUpdateManyMutationInput, SerialTrackerUncheckedUpdateManyInput>
+    /**
+     * Filter which SerialTrackers to update
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * Limit how many SerialTrackers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SerialTracker upsert
+   */
+  export type SerialTrackerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SerialTracker to update in case it exists.
+     */
+    where: SerialTrackerWhereUniqueInput
+    /**
+     * In case the SerialTracker found by the `where` argument doesn't exist, create a new SerialTracker with this data.
+     */
+    create: XOR<SerialTrackerCreateInput, SerialTrackerUncheckedCreateInput>
+    /**
+     * In case the SerialTracker was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SerialTrackerUpdateInput, SerialTrackerUncheckedUpdateInput>
+  }
+
+  /**
+   * SerialTracker delete
+   */
+  export type SerialTrackerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
+    /**
+     * Filter which SerialTracker to delete.
+     */
+    where: SerialTrackerWhereUniqueInput
+  }
+
+  /**
+   * SerialTracker deleteMany
+   */
+  export type SerialTrackerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SerialTrackers to delete
+     */
+    where?: SerialTrackerWhereInput
+    /**
+     * Limit how many SerialTrackers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SerialTracker without action
+   */
+  export type SerialTrackerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SerialTracker
+     */
+    select?: SerialTrackerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SerialTracker
+     */
+    omit?: SerialTrackerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SerialTrackerInclude<ExtArgs> | null
   }
 
 
@@ -3362,26 +4670,39 @@ export namespace Prisma {
 
   export type InvoiceAvgAggregateOutputType = {
     id: number | null
+    enterpId: number | null
     userId: number | null
     rcptNum: number | null
+    debNote: Decimal | null
+    credNote: Decimal | null
+    affecNum: number | null
+    vatFree: Decimal | null
     ctrlNum: number | null
     taxBase: Decimal | null
     vatPerc: number | null
     total: Decimal | null
+    serial: number | null
   }
 
   export type InvoiceSumAggregateOutputType = {
     id: number | null
+    enterpId: number | null
     userId: number | null
     rcptNum: number | null
+    debNote: Decimal | null
+    credNote: Decimal | null
+    affecNum: number | null
+    vatFree: Decimal | null
     ctrlNum: number | null
     taxBase: Decimal | null
     vatPerc: number | null
     total: Decimal | null
+    serial: number | null
   }
 
   export type InvoiceMinAggregateOutputType = {
     id: number | null
+    enterpId: number | null
     userId: number | null
     vendRif: string | null
     vendName: string | null
@@ -3390,6 +4711,10 @@ export namespace Prisma {
     rcptNum: number | null
     rcptName: string | null
     rcptUrl: string | null
+    debNote: Decimal | null
+    credNote: Decimal | null
+    affecNum: number | null
+    vatFree: Decimal | null
     ctrlNum: number | null
     taxBase: Decimal | null
     vatPerc: number | null
@@ -3397,10 +4722,12 @@ export namespace Prisma {
     excel: string | null
     sentTo: string | null
     emission: Date | null
+    serial: number | null
   }
 
   export type InvoiceMaxAggregateOutputType = {
     id: number | null
+    enterpId: number | null
     userId: number | null
     vendRif: string | null
     vendName: string | null
@@ -3409,6 +4736,10 @@ export namespace Prisma {
     rcptNum: number | null
     rcptName: string | null
     rcptUrl: string | null
+    debNote: Decimal | null
+    credNote: Decimal | null
+    affecNum: number | null
+    vatFree: Decimal | null
     ctrlNum: number | null
     taxBase: Decimal | null
     vatPerc: number | null
@@ -3416,10 +4747,12 @@ export namespace Prisma {
     excel: string | null
     sentTo: string | null
     emission: Date | null
+    serial: number | null
   }
 
   export type InvoiceCountAggregateOutputType = {
     id: number
+    enterpId: number
     userId: number
     vendRif: number
     vendName: number
@@ -3428,6 +4761,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: number
     rcptUrl: number
+    debNote: number
+    credNote: number
+    affecNum: number
+    vatFree: number
     ctrlNum: number
     taxBase: number
     vatPerc: number
@@ -3435,32 +4772,46 @@ export namespace Prisma {
     excel: number
     sentTo: number
     emission: number
+    serial: number
     _all: number
   }
 
 
   export type InvoiceAvgAggregateInputType = {
     id?: true
+    enterpId?: true
     userId?: true
     rcptNum?: true
+    debNote?: true
+    credNote?: true
+    affecNum?: true
+    vatFree?: true
     ctrlNum?: true
     taxBase?: true
     vatPerc?: true
     total?: true
+    serial?: true
   }
 
   export type InvoiceSumAggregateInputType = {
     id?: true
+    enterpId?: true
     userId?: true
     rcptNum?: true
+    debNote?: true
+    credNote?: true
+    affecNum?: true
+    vatFree?: true
     ctrlNum?: true
     taxBase?: true
     vatPerc?: true
     total?: true
+    serial?: true
   }
 
   export type InvoiceMinAggregateInputType = {
     id?: true
+    enterpId?: true
     userId?: true
     vendRif?: true
     vendName?: true
@@ -3469,6 +4820,10 @@ export namespace Prisma {
     rcptNum?: true
     rcptName?: true
     rcptUrl?: true
+    debNote?: true
+    credNote?: true
+    affecNum?: true
+    vatFree?: true
     ctrlNum?: true
     taxBase?: true
     vatPerc?: true
@@ -3476,10 +4831,12 @@ export namespace Prisma {
     excel?: true
     sentTo?: true
     emission?: true
+    serial?: true
   }
 
   export type InvoiceMaxAggregateInputType = {
     id?: true
+    enterpId?: true
     userId?: true
     vendRif?: true
     vendName?: true
@@ -3488,6 +4845,10 @@ export namespace Prisma {
     rcptNum?: true
     rcptName?: true
     rcptUrl?: true
+    debNote?: true
+    credNote?: true
+    affecNum?: true
+    vatFree?: true
     ctrlNum?: true
     taxBase?: true
     vatPerc?: true
@@ -3495,10 +4856,12 @@ export namespace Prisma {
     excel?: true
     sentTo?: true
     emission?: true
+    serial?: true
   }
 
   export type InvoiceCountAggregateInputType = {
     id?: true
+    enterpId?: true
     userId?: true
     vendRif?: true
     vendName?: true
@@ -3507,6 +4870,10 @@ export namespace Prisma {
     rcptNum?: true
     rcptName?: true
     rcptUrl?: true
+    debNote?: true
+    credNote?: true
+    affecNum?: true
+    vatFree?: true
     ctrlNum?: true
     taxBase?: true
     vatPerc?: true
@@ -3514,6 +4881,7 @@ export namespace Prisma {
     excel?: true
     sentTo?: true
     emission?: true
+    serial?: true
     _all?: true
   }
 
@@ -3605,6 +4973,7 @@ export namespace Prisma {
 
   export type InvoiceGroupByOutputType = {
     id: number
+    enterpId: number
     userId: number
     vendRif: string
     vendName: string
@@ -3613,6 +4982,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal
+    credNote: Decimal
+    affecNum: number
+    vatFree: Decimal
     ctrlNum: number
     taxBase: Decimal
     vatPerc: number
@@ -3620,6 +4993,7 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission: Date
+    serial: number
     _count: InvoiceCountAggregateOutputType | null
     _avg: InvoiceAvgAggregateOutputType | null
     _sum: InvoiceSumAggregateOutputType | null
@@ -3643,6 +5017,7 @@ export namespace Prisma {
 
   export type InvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    enterpId?: boolean
     userId?: boolean
     vendRif?: boolean
     vendName?: boolean
@@ -3651,6 +5026,10 @@ export namespace Prisma {
     rcptNum?: boolean
     rcptName?: boolean
     rcptUrl?: boolean
+    debNote?: boolean
+    credNote?: boolean
+    affecNum?: boolean
+    vatFree?: boolean
     ctrlNum?: boolean
     taxBase?: boolean
     vatPerc?: boolean
@@ -3658,11 +5037,14 @@ export namespace Prisma {
     excel?: boolean
     sentTo?: boolean
     emission?: boolean
+    serial?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invoice"]>
 
   export type InvoiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    enterpId?: boolean
     userId?: boolean
     vendRif?: boolean
     vendName?: boolean
@@ -3671,6 +5053,10 @@ export namespace Prisma {
     rcptNum?: boolean
     rcptName?: boolean
     rcptUrl?: boolean
+    debNote?: boolean
+    credNote?: boolean
+    affecNum?: boolean
+    vatFree?: boolean
     ctrlNum?: boolean
     taxBase?: boolean
     vatPerc?: boolean
@@ -3678,11 +5064,14 @@ export namespace Prisma {
     excel?: boolean
     sentTo?: boolean
     emission?: boolean
+    serial?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invoice"]>
 
   export type InvoiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    enterpId?: boolean
     userId?: boolean
     vendRif?: boolean
     vendName?: boolean
@@ -3691,6 +5080,10 @@ export namespace Prisma {
     rcptNum?: boolean
     rcptName?: boolean
     rcptUrl?: boolean
+    debNote?: boolean
+    credNote?: boolean
+    affecNum?: boolean
+    vatFree?: boolean
     ctrlNum?: boolean
     taxBase?: boolean
     vatPerc?: boolean
@@ -3698,11 +5091,14 @@ export namespace Prisma {
     excel?: boolean
     sentTo?: boolean
     emission?: boolean
+    serial?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invoice"]>
 
   export type InvoiceSelectScalar = {
     id?: boolean
+    enterpId?: boolean
     userId?: boolean
     vendRif?: boolean
     vendName?: boolean
@@ -3711,6 +5107,10 @@ export namespace Prisma {
     rcptNum?: boolean
     rcptName?: boolean
     rcptUrl?: boolean
+    debNote?: boolean
+    credNote?: boolean
+    affecNum?: boolean
+    vatFree?: boolean
     ctrlNum?: boolean
     taxBase?: boolean
     vatPerc?: boolean
@@ -3718,26 +5118,32 @@ export namespace Prisma {
     excel?: boolean
     sentTo?: boolean
     emission?: boolean
+    serial?: boolean
   }
 
-  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "vendRif" | "vendName" | "vendAddr" | "vendPhone" | "rcptNum" | "rcptName" | "rcptUrl" | "ctrlNum" | "taxBase" | "vatPerc" | "total" | "excel" | "sentTo" | "emission", ExtArgs["result"]["invoice"]>
+  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "enterpId" | "userId" | "vendRif" | "vendName" | "vendAddr" | "vendPhone" | "rcptNum" | "rcptName" | "rcptUrl" | "debNote" | "credNote" | "affecNum" | "vatFree" | "ctrlNum" | "taxBase" | "vatPerc" | "total" | "excel" | "sentTo" | "emission" | "serial", ExtArgs["result"]["invoice"]>
   export type InvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }
   export type InvoiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }
   export type InvoiceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    enterprise?: boolean | EnterpriseDefaultArgs<ExtArgs>
   }
 
   export type $InvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Invoice"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      enterprise: Prisma.$EnterprisePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      enterpId: number
       userId: number
       vendRif: string
       vendName: string
@@ -3746,6 +5152,10 @@ export namespace Prisma {
       rcptNum: number
       rcptName: string
       rcptUrl: string
+      debNote: Prisma.Decimal
+      credNote: Prisma.Decimal
+      affecNum: number
+      vatFree: Prisma.Decimal
       ctrlNum: number
       taxBase: Prisma.Decimal
       vatPerc: number
@@ -3753,6 +5163,7 @@ export namespace Prisma {
       excel: string
       sentTo: string
       emission: Date
+      serial: number
     }, ExtArgs["result"]["invoice"]>
     composites: {}
   }
@@ -4148,6 +5559,7 @@ export namespace Prisma {
   export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    enterprise<T extends EnterpriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EnterpriseDefaultArgs<ExtArgs>>): Prisma__EnterpriseClient<$Result.GetResult<Prisma.$EnterprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4178,6 +5590,7 @@ export namespace Prisma {
    */
   interface InvoiceFieldRefs {
     readonly id: FieldRef<"Invoice", 'Int'>
+    readonly enterpId: FieldRef<"Invoice", 'Int'>
     readonly userId: FieldRef<"Invoice", 'Int'>
     readonly vendRif: FieldRef<"Invoice", 'String'>
     readonly vendName: FieldRef<"Invoice", 'String'>
@@ -4186,6 +5599,10 @@ export namespace Prisma {
     readonly rcptNum: FieldRef<"Invoice", 'Int'>
     readonly rcptName: FieldRef<"Invoice", 'String'>
     readonly rcptUrl: FieldRef<"Invoice", 'String'>
+    readonly debNote: FieldRef<"Invoice", 'Decimal'>
+    readonly credNote: FieldRef<"Invoice", 'Decimal'>
+    readonly affecNum: FieldRef<"Invoice", 'Int'>
+    readonly vatFree: FieldRef<"Invoice", 'Decimal'>
     readonly ctrlNum: FieldRef<"Invoice", 'Int'>
     readonly taxBase: FieldRef<"Invoice", 'Decimal'>
     readonly vatPerc: FieldRef<"Invoice", 'Int'>
@@ -4193,6 +5610,7 @@ export namespace Prisma {
     readonly excel: FieldRef<"Invoice", 'String'>
     readonly sentTo: FieldRef<"Invoice", 'String'>
     readonly emission: FieldRef<"Invoice", 'DateTime'>
+    readonly serial: FieldRef<"Invoice", 'Int'>
   }
     
 
@@ -5670,14 +7088,25 @@ export namespace Prisma {
     entName: 'entName',
     entAddr: 'entAddr',
     entPhone: 'entPhone',
-    retPerc: 'retPerc'
+    deducPerc: 'deducPerc'
   };
 
   export type EnterpriseScalarFieldEnum = (typeof EnterpriseScalarFieldEnum)[keyof typeof EnterpriseScalarFieldEnum]
 
 
+  export const SerialTrackerScalarFieldEnum: {
+    id: 'id',
+    enterpId: 'enterpId',
+    serial: 'serial',
+    updateAt: 'updateAt'
+  };
+
+  export type SerialTrackerScalarFieldEnum = (typeof SerialTrackerScalarFieldEnum)[keyof typeof SerialTrackerScalarFieldEnum]
+
+
   export const InvoiceScalarFieldEnum: {
     id: 'id',
+    enterpId: 'enterpId',
     userId: 'userId',
     vendRif: 'vendRif',
     vendName: 'vendName',
@@ -5686,13 +7115,18 @@ export namespace Prisma {
     rcptNum: 'rcptNum',
     rcptName: 'rcptName',
     rcptUrl: 'rcptUrl',
+    debNote: 'debNote',
+    credNote: 'credNote',
+    affecNum: 'affecNum',
+    vatFree: 'vatFree',
     ctrlNum: 'ctrlNum',
     taxBase: 'taxBase',
     vatPerc: 'vatPerc',
     total: 'total',
     excel: 'excel',
     sentTo: 'sentTo',
-    emission: 'emission'
+    emission: 'emission',
+    serial: 'serial'
   };
 
   export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
@@ -5891,7 +7325,9 @@ export namespace Prisma {
     entName?: StringFilter<"Enterprise"> | string
     entAddr?: StringFilter<"Enterprise"> | string
     entPhone?: StringFilter<"Enterprise"> | string
-    retPerc?: BoolFilter<"Enterprise"> | boolean
+    deducPerc?: BoolFilter<"Enterprise"> | boolean
+    invoices?: InvoiceListRelationFilter
+    serials?: XOR<SerialTrackerNullableScalarRelationFilter, SerialTrackerWhereInput> | null
   }
 
   export type EnterpriseOrderByWithRelationInput = {
@@ -5900,7 +7336,9 @@ export namespace Prisma {
     entName?: SortOrder
     entAddr?: SortOrder
     entPhone?: SortOrder
-    retPerc?: SortOrder
+    deducPerc?: SortOrder
+    invoices?: InvoiceOrderByRelationAggregateInput
+    serials?: SerialTrackerOrderByWithRelationInput
   }
 
   export type EnterpriseWhereUniqueInput = Prisma.AtLeast<{
@@ -5912,7 +7350,9 @@ export namespace Prisma {
     entName?: StringFilter<"Enterprise"> | string
     entAddr?: StringFilter<"Enterprise"> | string
     entPhone?: StringFilter<"Enterprise"> | string
-    retPerc?: BoolFilter<"Enterprise"> | boolean
+    deducPerc?: BoolFilter<"Enterprise"> | boolean
+    invoices?: InvoiceListRelationFilter
+    serials?: XOR<SerialTrackerNullableScalarRelationFilter, SerialTrackerWhereInput> | null
   }, "id" | "entRif">
 
   export type EnterpriseOrderByWithAggregationInput = {
@@ -5921,7 +7361,7 @@ export namespace Prisma {
     entName?: SortOrder
     entAddr?: SortOrder
     entPhone?: SortOrder
-    retPerc?: SortOrder
+    deducPerc?: SortOrder
     _count?: EnterpriseCountOrderByAggregateInput
     _avg?: EnterpriseAvgOrderByAggregateInput
     _max?: EnterpriseMaxOrderByAggregateInput
@@ -5938,7 +7378,59 @@ export namespace Prisma {
     entName?: StringWithAggregatesFilter<"Enterprise"> | string
     entAddr?: StringWithAggregatesFilter<"Enterprise"> | string
     entPhone?: StringWithAggregatesFilter<"Enterprise"> | string
-    retPerc?: BoolWithAggregatesFilter<"Enterprise"> | boolean
+    deducPerc?: BoolWithAggregatesFilter<"Enterprise"> | boolean
+  }
+
+  export type SerialTrackerWhereInput = {
+    AND?: SerialTrackerWhereInput | SerialTrackerWhereInput[]
+    OR?: SerialTrackerWhereInput[]
+    NOT?: SerialTrackerWhereInput | SerialTrackerWhereInput[]
+    id?: IntFilter<"SerialTracker"> | number
+    enterpId?: IntFilter<"SerialTracker"> | number
+    serial?: IntFilter<"SerialTracker"> | number
+    updateAt?: DateTimeFilter<"SerialTracker"> | Date | string
+    enterprise?: XOR<EnterpriseScalarRelationFilter, EnterpriseWhereInput>
+  }
+
+  export type SerialTrackerOrderByWithRelationInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+    updateAt?: SortOrder
+    enterprise?: EnterpriseOrderByWithRelationInput
+  }
+
+  export type SerialTrackerWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    enterpId?: number
+    AND?: SerialTrackerWhereInput | SerialTrackerWhereInput[]
+    OR?: SerialTrackerWhereInput[]
+    NOT?: SerialTrackerWhereInput | SerialTrackerWhereInput[]
+    serial?: IntFilter<"SerialTracker"> | number
+    updateAt?: DateTimeFilter<"SerialTracker"> | Date | string
+    enterprise?: XOR<EnterpriseScalarRelationFilter, EnterpriseWhereInput>
+  }, "id" | "enterpId">
+
+  export type SerialTrackerOrderByWithAggregationInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+    updateAt?: SortOrder
+    _count?: SerialTrackerCountOrderByAggregateInput
+    _avg?: SerialTrackerAvgOrderByAggregateInput
+    _max?: SerialTrackerMaxOrderByAggregateInput
+    _min?: SerialTrackerMinOrderByAggregateInput
+    _sum?: SerialTrackerSumOrderByAggregateInput
+  }
+
+  export type SerialTrackerScalarWhereWithAggregatesInput = {
+    AND?: SerialTrackerScalarWhereWithAggregatesInput | SerialTrackerScalarWhereWithAggregatesInput[]
+    OR?: SerialTrackerScalarWhereWithAggregatesInput[]
+    NOT?: SerialTrackerScalarWhereWithAggregatesInput | SerialTrackerScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SerialTracker"> | number
+    enterpId?: IntWithAggregatesFilter<"SerialTracker"> | number
+    serial?: IntWithAggregatesFilter<"SerialTracker"> | number
+    updateAt?: DateTimeWithAggregatesFilter<"SerialTracker"> | Date | string
   }
 
   export type InvoiceWhereInput = {
@@ -5946,6 +7438,7 @@ export namespace Prisma {
     OR?: InvoiceWhereInput[]
     NOT?: InvoiceWhereInput | InvoiceWhereInput[]
     id?: IntFilter<"Invoice"> | number
+    enterpId?: IntFilter<"Invoice"> | number
     userId?: IntFilter<"Invoice"> | number
     vendRif?: StringFilter<"Invoice"> | string
     vendName?: StringFilter<"Invoice"> | string
@@ -5954,6 +7447,10 @@ export namespace Prisma {
     rcptNum?: IntFilter<"Invoice"> | number
     rcptName?: StringFilter<"Invoice"> | string
     rcptUrl?: StringFilter<"Invoice"> | string
+    debNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFilter<"Invoice"> | number
+    vatFree?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFilter<"Invoice"> | number
     taxBase?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFilter<"Invoice"> | number
@@ -5961,11 +7458,14 @@ export namespace Prisma {
     excel?: StringFilter<"Invoice"> | string
     sentTo?: StringFilter<"Invoice"> | string
     emission?: DateTimeFilter<"Invoice"> | Date | string
+    serial?: IntFilter<"Invoice"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    enterprise?: XOR<EnterpriseScalarRelationFilter, EnterpriseWhereInput>
   }
 
   export type InvoiceOrderByWithRelationInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     vendRif?: SortOrder
     vendName?: SortOrder
@@ -5974,6 +7474,10 @@ export namespace Prisma {
     rcptNum?: SortOrder
     rcptName?: SortOrder
     rcptUrl?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
@@ -5981,11 +7485,15 @@ export namespace Prisma {
     excel?: SortOrder
     sentTo?: SortOrder
     emission?: SortOrder
+    serial?: SortOrder
     user?: UserOrderByWithRelationInput
+    enterprise?: EnterpriseOrderByWithRelationInput
   }
 
   export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    enterpId?: number
+    serial?: number
     AND?: InvoiceWhereInput | InvoiceWhereInput[]
     OR?: InvoiceWhereInput[]
     NOT?: InvoiceWhereInput | InvoiceWhereInput[]
@@ -5997,6 +7505,10 @@ export namespace Prisma {
     rcptNum?: IntFilter<"Invoice"> | number
     rcptName?: StringFilter<"Invoice"> | string
     rcptUrl?: StringFilter<"Invoice"> | string
+    debNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFilter<"Invoice"> | number
+    vatFree?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFilter<"Invoice"> | number
     taxBase?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFilter<"Invoice"> | number
@@ -6005,10 +7517,12 @@ export namespace Prisma {
     sentTo?: StringFilter<"Invoice"> | string
     emission?: DateTimeFilter<"Invoice"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+    enterprise?: XOR<EnterpriseScalarRelationFilter, EnterpriseWhereInput>
+  }, "id" | "enterpId" | "serial">
 
   export type InvoiceOrderByWithAggregationInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     vendRif?: SortOrder
     vendName?: SortOrder
@@ -6017,6 +7531,10 @@ export namespace Prisma {
     rcptNum?: SortOrder
     rcptName?: SortOrder
     rcptUrl?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
@@ -6024,6 +7542,7 @@ export namespace Prisma {
     excel?: SortOrder
     sentTo?: SortOrder
     emission?: SortOrder
+    serial?: SortOrder
     _count?: InvoiceCountOrderByAggregateInput
     _avg?: InvoiceAvgOrderByAggregateInput
     _max?: InvoiceMaxOrderByAggregateInput
@@ -6036,6 +7555,7 @@ export namespace Prisma {
     OR?: InvoiceScalarWhereWithAggregatesInput[]
     NOT?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Invoice"> | number
+    enterpId?: IntWithAggregatesFilter<"Invoice"> | number
     userId?: IntWithAggregatesFilter<"Invoice"> | number
     vendRif?: StringWithAggregatesFilter<"Invoice"> | string
     vendName?: StringWithAggregatesFilter<"Invoice"> | string
@@ -6044,6 +7564,10 @@ export namespace Prisma {
     rcptNum?: IntWithAggregatesFilter<"Invoice"> | number
     rcptName?: StringWithAggregatesFilter<"Invoice"> | string
     rcptUrl?: StringWithAggregatesFilter<"Invoice"> | string
+    debNote?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    affecNum?: IntWithAggregatesFilter<"Invoice"> | number
+    vatFree?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntWithAggregatesFilter<"Invoice"> | number
     taxBase?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     vatPerc?: IntWithAggregatesFilter<"Invoice"> | number
@@ -6051,6 +7575,7 @@ export namespace Prisma {
     excel?: StringWithAggregatesFilter<"Invoice"> | string
     sentTo?: StringWithAggregatesFilter<"Invoice"> | string
     emission?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    serial?: IntWithAggregatesFilter<"Invoice"> | number
   }
 
   export type ContactWhereInput = {
@@ -6190,7 +7715,9 @@ export namespace Prisma {
     entName: string
     entAddr: string
     entPhone: string
-    retPerc?: boolean
+    deducPerc?: boolean
+    invoices?: InvoiceCreateNestedManyWithoutEnterpriseInput
+    serials?: SerialTrackerCreateNestedOneWithoutEnterpriseInput
   }
 
   export type EnterpriseUncheckedCreateInput = {
@@ -6199,7 +7726,9 @@ export namespace Prisma {
     entName: string
     entAddr: string
     entPhone: string
-    retPerc?: boolean
+    deducPerc?: boolean
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEnterpriseInput
+    serials?: SerialTrackerUncheckedCreateNestedOneWithoutEnterpriseInput
   }
 
   export type EnterpriseUpdateInput = {
@@ -6207,7 +7736,9 @@ export namespace Prisma {
     entName?: StringFieldUpdateOperationsInput | string
     entAddr?: StringFieldUpdateOperationsInput | string
     entPhone?: StringFieldUpdateOperationsInput | string
-    retPerc?: BoolFieldUpdateOperationsInput | boolean
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    invoices?: InvoiceUpdateManyWithoutEnterpriseNestedInput
+    serials?: SerialTrackerUpdateOneWithoutEnterpriseNestedInput
   }
 
   export type EnterpriseUncheckedUpdateInput = {
@@ -6216,7 +7747,9 @@ export namespace Prisma {
     entName?: StringFieldUpdateOperationsInput | string
     entAddr?: StringFieldUpdateOperationsInput | string
     entPhone?: StringFieldUpdateOperationsInput | string
-    retPerc?: BoolFieldUpdateOperationsInput | boolean
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    invoices?: InvoiceUncheckedUpdateManyWithoutEnterpriseNestedInput
+    serials?: SerialTrackerUncheckedUpdateOneWithoutEnterpriseNestedInput
   }
 
   export type EnterpriseCreateManyInput = {
@@ -6225,7 +7758,7 @@ export namespace Prisma {
     entName: string
     entAddr: string
     entPhone: string
-    retPerc?: boolean
+    deducPerc?: boolean
   }
 
   export type EnterpriseUpdateManyMutationInput = {
@@ -6233,7 +7766,7 @@ export namespace Prisma {
     entName?: StringFieldUpdateOperationsInput | string
     entAddr?: StringFieldUpdateOperationsInput | string
     entPhone?: StringFieldUpdateOperationsInput | string
-    retPerc?: BoolFieldUpdateOperationsInput | boolean
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EnterpriseUncheckedUpdateManyInput = {
@@ -6242,7 +7775,52 @@ export namespace Prisma {
     entName?: StringFieldUpdateOperationsInput | string
     entAddr?: StringFieldUpdateOperationsInput | string
     entPhone?: StringFieldUpdateOperationsInput | string
-    retPerc?: BoolFieldUpdateOperationsInput | boolean
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SerialTrackerCreateInput = {
+    serial?: number
+    updateAt: Date | string
+    enterprise: EnterpriseCreateNestedOneWithoutSerialsInput
+  }
+
+  export type SerialTrackerUncheckedCreateInput = {
+    id?: number
+    enterpId: number
+    serial?: number
+    updateAt: Date | string
+  }
+
+  export type SerialTrackerUpdateInput = {
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enterprise?: EnterpriseUpdateOneRequiredWithoutSerialsNestedInput
+  }
+
+  export type SerialTrackerUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SerialTrackerCreateManyInput = {
+    id?: number
+    enterpId: number
+    serial?: number
+    updateAt: Date | string
+  }
+
+  export type SerialTrackerUpdateManyMutationInput = {
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SerialTrackerUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InvoiceCreateInput = {
@@ -6253,6 +7831,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -6260,11 +7842,14 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
     user: UserCreateNestedOneWithoutInvoicesInput
+    enterprise: EnterpriseCreateNestedOneWithoutInvoicesInput
   }
 
   export type InvoiceUncheckedCreateInput = {
     id?: number
+    enterpId: number
     userId: number
     vendRif: string
     vendName: string
@@ -6273,6 +7858,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -6280,6 +7869,7 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
   }
 
   export type InvoiceUpdateInput = {
@@ -6290,6 +7880,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -6297,11 +7891,14 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutInvoicesNestedInput
+    enterprise?: EnterpriseUpdateOneRequiredWithoutInvoicesNestedInput
   }
 
   export type InvoiceUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     vendRif?: StringFieldUpdateOperationsInput | string
     vendName?: StringFieldUpdateOperationsInput | string
@@ -6310,6 +7907,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -6317,10 +7918,12 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
   }
 
   export type InvoiceCreateManyInput = {
     id?: number
+    enterpId: number
     userId: number
     vendRif: string
     vendName: string
@@ -6329,6 +7932,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -6336,6 +7943,7 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
   }
 
   export type InvoiceUpdateManyMutationInput = {
@@ -6346,6 +7954,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -6353,10 +7965,12 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
   }
 
   export type InvoiceUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     vendRif?: StringFieldUpdateOperationsInput | string
     vendName?: StringFieldUpdateOperationsInput | string
@@ -6365,6 +7979,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -6372,6 +7990,7 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
   }
 
   export type ContactCreateInput = {
@@ -6576,13 +8195,18 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type SerialTrackerNullableScalarRelationFilter = {
+    is?: SerialTrackerWhereInput | null
+    isNot?: SerialTrackerWhereInput | null
+  }
+
   export type EnterpriseCountOrderByAggregateInput = {
     id?: SortOrder
     entRif?: SortOrder
     entName?: SortOrder
     entAddr?: SortOrder
     entPhone?: SortOrder
-    retPerc?: SortOrder
+    deducPerc?: SortOrder
   }
 
   export type EnterpriseAvgOrderByAggregateInput = {
@@ -6595,7 +8219,7 @@ export namespace Prisma {
     entName?: SortOrder
     entAddr?: SortOrder
     entPhone?: SortOrder
-    retPerc?: SortOrder
+    deducPerc?: SortOrder
   }
 
   export type EnterpriseMinOrderByAggregateInput = {
@@ -6604,11 +8228,49 @@ export namespace Prisma {
     entName?: SortOrder
     entAddr?: SortOrder
     entPhone?: SortOrder
-    retPerc?: SortOrder
+    deducPerc?: SortOrder
   }
 
   export type EnterpriseSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type EnterpriseScalarRelationFilter = {
+    is?: EnterpriseWhereInput
+    isNot?: EnterpriseWhereInput
+  }
+
+  export type SerialTrackerCountOrderByAggregateInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type SerialTrackerAvgOrderByAggregateInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+  }
+
+  export type SerialTrackerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type SerialTrackerMinOrderByAggregateInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type SerialTrackerSumOrderByAggregateInput = {
+    id?: SortOrder
+    enterpId?: SortOrder
+    serial?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -6629,6 +8291,7 @@ export namespace Prisma {
 
   export type InvoiceCountOrderByAggregateInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     vendRif?: SortOrder
     vendName?: SortOrder
@@ -6637,6 +8300,10 @@ export namespace Prisma {
     rcptNum?: SortOrder
     rcptName?: SortOrder
     rcptUrl?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
@@ -6644,20 +8311,28 @@ export namespace Prisma {
     excel?: SortOrder
     sentTo?: SortOrder
     emission?: SortOrder
+    serial?: SortOrder
   }
 
   export type InvoiceAvgOrderByAggregateInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     rcptNum?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
     total?: SortOrder
+    serial?: SortOrder
   }
 
   export type InvoiceMaxOrderByAggregateInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     vendRif?: SortOrder
     vendName?: SortOrder
@@ -6666,6 +8341,10 @@ export namespace Prisma {
     rcptNum?: SortOrder
     rcptName?: SortOrder
     rcptUrl?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
@@ -6673,10 +8352,12 @@ export namespace Prisma {
     excel?: SortOrder
     sentTo?: SortOrder
     emission?: SortOrder
+    serial?: SortOrder
   }
 
   export type InvoiceMinOrderByAggregateInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     vendRif?: SortOrder
     vendName?: SortOrder
@@ -6685,6 +8366,10 @@ export namespace Prisma {
     rcptNum?: SortOrder
     rcptName?: SortOrder
     rcptUrl?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
@@ -6692,16 +8377,23 @@ export namespace Prisma {
     excel?: SortOrder
     sentTo?: SortOrder
     emission?: SortOrder
+    serial?: SortOrder
   }
 
   export type InvoiceSumOrderByAggregateInput = {
     id?: SortOrder
+    enterpId?: SortOrder
     userId?: SortOrder
     rcptNum?: SortOrder
+    debNote?: SortOrder
+    credNote?: SortOrder
+    affecNum?: SortOrder
+    vatFree?: SortOrder
     ctrlNum?: SortOrder
     taxBase?: SortOrder
     vatPerc?: SortOrder
     total?: SortOrder
+    serial?: SortOrder
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -6814,10 +8506,104 @@ export namespace Prisma {
     deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
   }
 
+  export type InvoiceCreateNestedManyWithoutEnterpriseInput = {
+    create?: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput> | InvoiceCreateWithoutEnterpriseInput[] | InvoiceUncheckedCreateWithoutEnterpriseInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutEnterpriseInput | InvoiceCreateOrConnectWithoutEnterpriseInput[]
+    createMany?: InvoiceCreateManyEnterpriseInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type SerialTrackerCreateNestedOneWithoutEnterpriseInput = {
+    create?: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+    connectOrCreate?: SerialTrackerCreateOrConnectWithoutEnterpriseInput
+    connect?: SerialTrackerWhereUniqueInput
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutEnterpriseInput = {
+    create?: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput> | InvoiceCreateWithoutEnterpriseInput[] | InvoiceUncheckedCreateWithoutEnterpriseInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutEnterpriseInput | InvoiceCreateOrConnectWithoutEnterpriseInput[]
+    createMany?: InvoiceCreateManyEnterpriseInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type SerialTrackerUncheckedCreateNestedOneWithoutEnterpriseInput = {
+    create?: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+    connectOrCreate?: SerialTrackerCreateOrConnectWithoutEnterpriseInput
+    connect?: SerialTrackerWhereUniqueInput
+  }
+
+  export type InvoiceUpdateManyWithoutEnterpriseNestedInput = {
+    create?: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput> | InvoiceCreateWithoutEnterpriseInput[] | InvoiceUncheckedCreateWithoutEnterpriseInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutEnterpriseInput | InvoiceCreateOrConnectWithoutEnterpriseInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutEnterpriseInput | InvoiceUpsertWithWhereUniqueWithoutEnterpriseInput[]
+    createMany?: InvoiceCreateManyEnterpriseInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutEnterpriseInput | InvoiceUpdateWithWhereUniqueWithoutEnterpriseInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutEnterpriseInput | InvoiceUpdateManyWithWhereWithoutEnterpriseInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type SerialTrackerUpdateOneWithoutEnterpriseNestedInput = {
+    create?: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+    connectOrCreate?: SerialTrackerCreateOrConnectWithoutEnterpriseInput
+    upsert?: SerialTrackerUpsertWithoutEnterpriseInput
+    disconnect?: SerialTrackerWhereInput | boolean
+    delete?: SerialTrackerWhereInput | boolean
+    connect?: SerialTrackerWhereUniqueInput
+    update?: XOR<XOR<SerialTrackerUpdateToOneWithWhereWithoutEnterpriseInput, SerialTrackerUpdateWithoutEnterpriseInput>, SerialTrackerUncheckedUpdateWithoutEnterpriseInput>
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutEnterpriseNestedInput = {
+    create?: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput> | InvoiceCreateWithoutEnterpriseInput[] | InvoiceUncheckedCreateWithoutEnterpriseInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutEnterpriseInput | InvoiceCreateOrConnectWithoutEnterpriseInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutEnterpriseInput | InvoiceUpsertWithWhereUniqueWithoutEnterpriseInput[]
+    createMany?: InvoiceCreateManyEnterpriseInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutEnterpriseInput | InvoiceUpdateWithWhereUniqueWithoutEnterpriseInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutEnterpriseInput | InvoiceUpdateManyWithWhereWithoutEnterpriseInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type SerialTrackerUncheckedUpdateOneWithoutEnterpriseNestedInput = {
+    create?: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+    connectOrCreate?: SerialTrackerCreateOrConnectWithoutEnterpriseInput
+    upsert?: SerialTrackerUpsertWithoutEnterpriseInput
+    disconnect?: SerialTrackerWhereInput | boolean
+    delete?: SerialTrackerWhereInput | boolean
+    connect?: SerialTrackerWhereUniqueInput
+    update?: XOR<XOR<SerialTrackerUpdateToOneWithWhereWithoutEnterpriseInput, SerialTrackerUpdateWithoutEnterpriseInput>, SerialTrackerUncheckedUpdateWithoutEnterpriseInput>
+  }
+
+  export type EnterpriseCreateNestedOneWithoutSerialsInput = {
+    create?: XOR<EnterpriseCreateWithoutSerialsInput, EnterpriseUncheckedCreateWithoutSerialsInput>
+    connectOrCreate?: EnterpriseCreateOrConnectWithoutSerialsInput
+    connect?: EnterpriseWhereUniqueInput
+  }
+
+  export type EnterpriseUpdateOneRequiredWithoutSerialsNestedInput = {
+    create?: XOR<EnterpriseCreateWithoutSerialsInput, EnterpriseUncheckedCreateWithoutSerialsInput>
+    connectOrCreate?: EnterpriseCreateOrConnectWithoutSerialsInput
+    upsert?: EnterpriseUpsertWithoutSerialsInput
+    connect?: EnterpriseWhereUniqueInput
+    update?: XOR<XOR<EnterpriseUpdateToOneWithWhereWithoutSerialsInput, EnterpriseUpdateWithoutSerialsInput>, EnterpriseUncheckedUpdateWithoutSerialsInput>
+  }
+
   export type UserCreateNestedOneWithoutInvoicesInput = {
     create?: XOR<UserCreateWithoutInvoicesInput, UserUncheckedCreateWithoutInvoicesInput>
     connectOrCreate?: UserCreateOrConnectWithoutInvoicesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type EnterpriseCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<EnterpriseCreateWithoutInvoicesInput, EnterpriseUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: EnterpriseCreateOrConnectWithoutInvoicesInput
+    connect?: EnterpriseWhereUniqueInput
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -6834,6 +8620,14 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutInvoicesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInvoicesInput, UserUpdateWithoutInvoicesInput>, UserUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type EnterpriseUpdateOneRequiredWithoutInvoicesNestedInput = {
+    create?: XOR<EnterpriseCreateWithoutInvoicesInput, EnterpriseUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: EnterpriseCreateOrConnectWithoutInvoicesInput
+    upsert?: EnterpriseUpsertWithoutInvoicesInput
+    connect?: EnterpriseWhereUniqueInput
+    update?: XOR<XOR<EnterpriseUpdateToOneWithWhereWithoutInvoicesInput, EnterpriseUpdateWithoutInvoicesInput>, EnterpriseUncheckedUpdateWithoutInvoicesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6978,6 +8772,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -6985,10 +8783,13 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
+    enterprise: EnterpriseCreateNestedOneWithoutInvoicesInput
   }
 
   export type InvoiceUncheckedCreateWithoutUserInput = {
     id?: number
+    enterpId: number
     vendRif: string
     vendName: string
     vendAddr: string
@@ -6996,6 +8797,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -7003,6 +8808,7 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
   }
 
   export type InvoiceCreateOrConnectWithoutUserInput = {
@@ -7036,6 +8842,7 @@ export namespace Prisma {
     OR?: InvoiceScalarWhereInput[]
     NOT?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
     id?: IntFilter<"Invoice"> | number
+    enterpId?: IntFilter<"Invoice"> | number
     userId?: IntFilter<"Invoice"> | number
     vendRif?: StringFilter<"Invoice"> | string
     vendName?: StringFilter<"Invoice"> | string
@@ -7044,6 +8851,10 @@ export namespace Prisma {
     rcptNum?: IntFilter<"Invoice"> | number
     rcptName?: StringFilter<"Invoice"> | string
     rcptUrl?: StringFilter<"Invoice"> | string
+    debNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFilter<"Invoice"> | number
+    vatFree?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFilter<"Invoice"> | number
     taxBase?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFilter<"Invoice"> | number
@@ -7051,6 +8862,172 @@ export namespace Prisma {
     excel?: StringFilter<"Invoice"> | string
     sentTo?: StringFilter<"Invoice"> | string
     emission?: DateTimeFilter<"Invoice"> | Date | string
+    serial?: IntFilter<"Invoice"> | number
+  }
+
+  export type InvoiceCreateWithoutEnterpriseInput = {
+    vendRif: string
+    vendName: string
+    vendAddr: string
+    vendPhone: string
+    rcptNum: number
+    rcptName: string
+    rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
+    ctrlNum: number
+    taxBase: Decimal | DecimalJsLike | number | string
+    vatPerc: number
+    total: Decimal | DecimalJsLike | number | string
+    excel: string
+    sentTo: string
+    emission?: Date | string
+    serial: number
+    user: UserCreateNestedOneWithoutInvoicesInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutEnterpriseInput = {
+    id?: number
+    userId: number
+    vendRif: string
+    vendName: string
+    vendAddr: string
+    vendPhone: string
+    rcptNum: number
+    rcptName: string
+    rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
+    ctrlNum: number
+    taxBase: Decimal | DecimalJsLike | number | string
+    vatPerc: number
+    total: Decimal | DecimalJsLike | number | string
+    excel: string
+    sentTo: string
+    emission?: Date | string
+    serial: number
+  }
+
+  export type InvoiceCreateOrConnectWithoutEnterpriseInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput>
+  }
+
+  export type InvoiceCreateManyEnterpriseInputEnvelope = {
+    data: InvoiceCreateManyEnterpriseInput | InvoiceCreateManyEnterpriseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SerialTrackerCreateWithoutEnterpriseInput = {
+    serial?: number
+    updateAt: Date | string
+  }
+
+  export type SerialTrackerUncheckedCreateWithoutEnterpriseInput = {
+    id?: number
+    serial?: number
+    updateAt: Date | string
+  }
+
+  export type SerialTrackerCreateOrConnectWithoutEnterpriseInput = {
+    where: SerialTrackerWhereUniqueInput
+    create: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+  }
+
+  export type InvoiceUpsertWithWhereUniqueWithoutEnterpriseInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutEnterpriseInput, InvoiceUncheckedUpdateWithoutEnterpriseInput>
+    create: XOR<InvoiceCreateWithoutEnterpriseInput, InvoiceUncheckedCreateWithoutEnterpriseInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutEnterpriseInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutEnterpriseInput, InvoiceUncheckedUpdateWithoutEnterpriseInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutEnterpriseInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutEnterpriseInput>
+  }
+
+  export type SerialTrackerUpsertWithoutEnterpriseInput = {
+    update: XOR<SerialTrackerUpdateWithoutEnterpriseInput, SerialTrackerUncheckedUpdateWithoutEnterpriseInput>
+    create: XOR<SerialTrackerCreateWithoutEnterpriseInput, SerialTrackerUncheckedCreateWithoutEnterpriseInput>
+    where?: SerialTrackerWhereInput
+  }
+
+  export type SerialTrackerUpdateToOneWithWhereWithoutEnterpriseInput = {
+    where?: SerialTrackerWhereInput
+    data: XOR<SerialTrackerUpdateWithoutEnterpriseInput, SerialTrackerUncheckedUpdateWithoutEnterpriseInput>
+  }
+
+  export type SerialTrackerUpdateWithoutEnterpriseInput = {
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SerialTrackerUncheckedUpdateWithoutEnterpriseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    serial?: IntFieldUpdateOperationsInput | number
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnterpriseCreateWithoutSerialsInput = {
+    entRif: string
+    entName: string
+    entAddr: string
+    entPhone: string
+    deducPerc?: boolean
+    invoices?: InvoiceCreateNestedManyWithoutEnterpriseInput
+  }
+
+  export type EnterpriseUncheckedCreateWithoutSerialsInput = {
+    id?: number
+    entRif: string
+    entName: string
+    entAddr: string
+    entPhone: string
+    deducPerc?: boolean
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEnterpriseInput
+  }
+
+  export type EnterpriseCreateOrConnectWithoutSerialsInput = {
+    where: EnterpriseWhereUniqueInput
+    create: XOR<EnterpriseCreateWithoutSerialsInput, EnterpriseUncheckedCreateWithoutSerialsInput>
+  }
+
+  export type EnterpriseUpsertWithoutSerialsInput = {
+    update: XOR<EnterpriseUpdateWithoutSerialsInput, EnterpriseUncheckedUpdateWithoutSerialsInput>
+    create: XOR<EnterpriseCreateWithoutSerialsInput, EnterpriseUncheckedCreateWithoutSerialsInput>
+    where?: EnterpriseWhereInput
+  }
+
+  export type EnterpriseUpdateToOneWithWhereWithoutSerialsInput = {
+    where?: EnterpriseWhereInput
+    data: XOR<EnterpriseUpdateWithoutSerialsInput, EnterpriseUncheckedUpdateWithoutSerialsInput>
+  }
+
+  export type EnterpriseUpdateWithoutSerialsInput = {
+    entRif?: StringFieldUpdateOperationsInput | string
+    entName?: StringFieldUpdateOperationsInput | string
+    entAddr?: StringFieldUpdateOperationsInput | string
+    entPhone?: StringFieldUpdateOperationsInput | string
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    invoices?: InvoiceUpdateManyWithoutEnterpriseNestedInput
+  }
+
+  export type EnterpriseUncheckedUpdateWithoutSerialsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    entRif?: StringFieldUpdateOperationsInput | string
+    entName?: StringFieldUpdateOperationsInput | string
+    entAddr?: StringFieldUpdateOperationsInput | string
+    entPhone?: StringFieldUpdateOperationsInput | string
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    invoices?: InvoiceUncheckedUpdateManyWithoutEnterpriseNestedInput
   }
 
   export type UserCreateWithoutInvoicesInput = {
@@ -7077,6 +9054,30 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutInvoicesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutInvoicesInput, UserUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type EnterpriseCreateWithoutInvoicesInput = {
+    entRif: string
+    entName: string
+    entAddr: string
+    entPhone: string
+    deducPerc?: boolean
+    serials?: SerialTrackerCreateNestedOneWithoutEnterpriseInput
+  }
+
+  export type EnterpriseUncheckedCreateWithoutInvoicesInput = {
+    id?: number
+    entRif: string
+    entName: string
+    entAddr: string
+    entPhone: string
+    deducPerc?: boolean
+    serials?: SerialTrackerUncheckedCreateNestedOneWithoutEnterpriseInput
+  }
+
+  export type EnterpriseCreateOrConnectWithoutInvoicesInput = {
+    where: EnterpriseWhereUniqueInput
+    create: XOR<EnterpriseCreateWithoutInvoicesInput, EnterpriseUncheckedCreateWithoutInvoicesInput>
   }
 
   export type UserUpsertWithoutInvoicesInput = {
@@ -7111,8 +9112,39 @@ export namespace Prisma {
     madeAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnterpriseUpsertWithoutInvoicesInput = {
+    update: XOR<EnterpriseUpdateWithoutInvoicesInput, EnterpriseUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<EnterpriseCreateWithoutInvoicesInput, EnterpriseUncheckedCreateWithoutInvoicesInput>
+    where?: EnterpriseWhereInput
+  }
+
+  export type EnterpriseUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: EnterpriseWhereInput
+    data: XOR<EnterpriseUpdateWithoutInvoicesInput, EnterpriseUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type EnterpriseUpdateWithoutInvoicesInput = {
+    entRif?: StringFieldUpdateOperationsInput | string
+    entName?: StringFieldUpdateOperationsInput | string
+    entAddr?: StringFieldUpdateOperationsInput | string
+    entPhone?: StringFieldUpdateOperationsInput | string
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    serials?: SerialTrackerUpdateOneWithoutEnterpriseNestedInput
+  }
+
+  export type EnterpriseUncheckedUpdateWithoutInvoicesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    entRif?: StringFieldUpdateOperationsInput | string
+    entName?: StringFieldUpdateOperationsInput | string
+    entAddr?: StringFieldUpdateOperationsInput | string
+    entPhone?: StringFieldUpdateOperationsInput | string
+    deducPerc?: BoolFieldUpdateOperationsInput | boolean
+    serials?: SerialTrackerUncheckedUpdateOneWithoutEnterpriseNestedInput
+  }
+
   export type InvoiceCreateManyUserInput = {
     id?: number
+    enterpId: number
     vendRif: string
     vendName: string
     vendAddr: string
@@ -7120,6 +9152,10 @@ export namespace Prisma {
     rcptNum: number
     rcptName: string
     rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
     ctrlNum: number
     taxBase: Decimal | DecimalJsLike | number | string
     vatPerc: number
@@ -7127,6 +9163,7 @@ export namespace Prisma {
     excel: string
     sentTo: string
     emission?: Date | string
+    serial: number
   }
 
   export type InvoiceUpdateWithoutUserInput = {
@@ -7137,6 +9174,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -7144,10 +9185,13 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
+    enterprise?: EnterpriseUpdateOneRequiredWithoutInvoicesNestedInput
   }
 
   export type InvoiceUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
     vendRif?: StringFieldUpdateOperationsInput | string
     vendName?: StringFieldUpdateOperationsInput | string
     vendAddr?: StringFieldUpdateOperationsInput | string
@@ -7155,6 +9199,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -7162,10 +9210,12 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
   }
 
   export type InvoiceUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    enterpId?: IntFieldUpdateOperationsInput | number
     vendRif?: StringFieldUpdateOperationsInput | string
     vendName?: StringFieldUpdateOperationsInput | string
     vendAddr?: StringFieldUpdateOperationsInput | string
@@ -7173,6 +9223,10 @@ export namespace Prisma {
     rcptNum?: IntFieldUpdateOperationsInput | number
     rcptName?: StringFieldUpdateOperationsInput | string
     rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ctrlNum?: IntFieldUpdateOperationsInput | number
     taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     vatPerc?: IntFieldUpdateOperationsInput | number
@@ -7180,6 +9234,102 @@ export namespace Prisma {
     excel?: StringFieldUpdateOperationsInput | string
     sentTo?: StringFieldUpdateOperationsInput | string
     emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceCreateManyEnterpriseInput = {
+    id?: number
+    userId: number
+    vendRif: string
+    vendName: string
+    vendAddr: string
+    vendPhone: string
+    rcptNum: number
+    rcptName: string
+    rcptUrl: string
+    debNote: Decimal | DecimalJsLike | number | string
+    credNote: Decimal | DecimalJsLike | number | string
+    affecNum: number
+    vatFree: Decimal | DecimalJsLike | number | string
+    ctrlNum: number
+    taxBase: Decimal | DecimalJsLike | number | string
+    vatPerc: number
+    total: Decimal | DecimalJsLike | number | string
+    excel: string
+    sentTo: string
+    emission?: Date | string
+    serial: number
+  }
+
+  export type InvoiceUpdateWithoutEnterpriseInput = {
+    vendRif?: StringFieldUpdateOperationsInput | string
+    vendName?: StringFieldUpdateOperationsInput | string
+    vendAddr?: StringFieldUpdateOperationsInput | string
+    vendPhone?: StringFieldUpdateOperationsInput | string
+    rcptNum?: IntFieldUpdateOperationsInput | number
+    rcptName?: StringFieldUpdateOperationsInput | string
+    rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ctrlNum?: IntFieldUpdateOperationsInput | number
+    taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatPerc?: IntFieldUpdateOperationsInput | number
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    excel?: StringFieldUpdateOperationsInput | string
+    sentTo?: StringFieldUpdateOperationsInput | string
+    emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutInvoicesNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutEnterpriseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    vendRif?: StringFieldUpdateOperationsInput | string
+    vendName?: StringFieldUpdateOperationsInput | string
+    vendAddr?: StringFieldUpdateOperationsInput | string
+    vendPhone?: StringFieldUpdateOperationsInput | string
+    rcptNum?: IntFieldUpdateOperationsInput | number
+    rcptName?: StringFieldUpdateOperationsInput | string
+    rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ctrlNum?: IntFieldUpdateOperationsInput | number
+    taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatPerc?: IntFieldUpdateOperationsInput | number
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    excel?: StringFieldUpdateOperationsInput | string
+    sentTo?: StringFieldUpdateOperationsInput | string
+    emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutEnterpriseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    vendRif?: StringFieldUpdateOperationsInput | string
+    vendName?: StringFieldUpdateOperationsInput | string
+    vendAddr?: StringFieldUpdateOperationsInput | string
+    vendPhone?: StringFieldUpdateOperationsInput | string
+    rcptNum?: IntFieldUpdateOperationsInput | number
+    rcptName?: StringFieldUpdateOperationsInput | string
+    rcptUrl?: StringFieldUpdateOperationsInput | string
+    debNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    credNote?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    affecNum?: IntFieldUpdateOperationsInput | number
+    vatFree?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ctrlNum?: IntFieldUpdateOperationsInput | number
+    taxBase?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    vatPerc?: IntFieldUpdateOperationsInput | number
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    excel?: StringFieldUpdateOperationsInput | string
+    sentTo?: StringFieldUpdateOperationsInput | string
+    emission?: DateTimeFieldUpdateOperationsInput | Date | string
+    serial?: IntFieldUpdateOperationsInput | number
   }
 
 

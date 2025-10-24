@@ -29,16 +29,28 @@ model User {
 }
 
 model Enterprise {
-  id       Int     @id @default(autoincrement())
-  entRif   String  @unique @map("ent_rif")
-  entName  String  @map("ent_name")
-  entAddr  String  @map("ent_address")
-  entPhone String  @map("ent_phone_number")
-  retPerc  Boolean @default(false) @map("retention_percentage")
+  id        Int            @id @default(autoincrement())
+  entRif    String         @unique @map("ent_rif")
+  entName   String         @map("ent_name")
+  entAddr   String         @map("ent_address")
+  entPhone  String         @map("ent_phone_number")
+  deducPerc Boolean        @default(false) @map("retention_percentage")
+  invoices  Invoice[]
+  serials   SerialTracker?
+}
+
+model SerialTracker {
+  id       Int      @id @default(autoincrement())
+  enterpId Int      @unique @map("enterprise_id")
+  serial   Int      @default(0) @map("current_serial")
+  updateAt DateTime @map("updated_at")
+
+  enterprise Enterprise @relation(fields: [enterpId], references: [id])
 }
 
 model Invoice {
   id        Int      @id @default(autoincrement())
+  enterpId  Int      @unique @map("enterprise_id")
   userId    Int      @map("user_id")
   vendRif   String   @map("vendor_rif")
   vendName  String   @map("vendor_name")
@@ -47,6 +59,10 @@ model Invoice {
   rcptNum   Int      @map("receipt_number")
   rcptName  String   @map("receipt_file_name")
   rcptUrl   String   @map("receipt_file_url")
+  debNote   Decimal  @map("debit_note")
+  credNote  Decimal  @map("credit_note")
+  affecNum  Int      @map("affected_receipt_num")
+  vatFree   Decimal  @map("vat_free_amount")
   ctrlNum   Int      @map("control_number")
   taxBase   Decimal  @map("taxable_base")
   vatPerc   Int      @map("vat_percentage")
@@ -54,7 +70,10 @@ model Invoice {
   excel     String   @map("excel_file")
   sentTo    String   @map("sent_to")
   emission  DateTime @default(now()) @map("emitted_at")
-  user      User     @relation(fields: [userId], references: [id])
+  serial    Int      @unique @map("serial")
+
+  user       User       @relation(fields: [userId], references: [id])
+  enterprise Enterprise @relation(fields: [enterpId], references: [id])
 }
 
 model Contact {

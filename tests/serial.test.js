@@ -1,7 +1,6 @@
 import { describe, test, it, expect, vi, beforeEach } from "vitest";
-import { setSerial, getSerial, generateSerial } from "../src/controllers/serialController";
-import prisma from "../src/prismaClient.js";
-import e from "express";
+import { setSerial, getSerial, generateSerial } from "../server/controllers/serialController.js";
+import prisma from "../server/prismaClient.js";
 
 vi.mock('../src/prismaClient.js', () => ({
   default: {

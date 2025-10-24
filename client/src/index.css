@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 1280px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --lightBlue-accent : #608dff;
+  --blue-accent : #457aff;
+}
+
+body {
+  margin: 0;
+}
+
+@tailwind utilities;
+
+@layer utilities {
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0) inset;
+    -webkit-text-fill-color: #ffff; /* text color */
+    transition: background-color 5000s ease-in-out 0s;
+    
+  }
+}
+
+input {
+  caret-color: #ffff;
+}
