@@ -1,10 +1,11 @@
 import { LoginView } from "./views/loginView"
+import { InvoiceView } from "./views/InvoiceView"
 
 function App() {
 
   return (
     <>
-    <LoginView />
+    <InvoiceView></InvoiceView>
     </>
   )
 }
