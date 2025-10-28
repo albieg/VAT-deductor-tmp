@@ -1,3 +1,4 @@
+@import 'tippy.js/dist/tippy.css'; 
 @import "tailwindcss";
 
 :root {
@@ -29,4 +30,11 @@ body {
 
 input {
   caret-color: #ffff;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+:focus {
+  outline: none;
 }

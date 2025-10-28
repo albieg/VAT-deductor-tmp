@@ -16,13 +16,17 @@
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
+    "@tippyjs/react": "^4.2.6",
     "bcryptjs": "^3.0.2",
     "exceljs": "^4.4.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "pg": "^8.16.3",
-    "sqlite3": "^5.1.7"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sqlite3": "^5.1.7",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@prisma/client": "^6.16.3",

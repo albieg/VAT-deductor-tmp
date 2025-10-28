@@ -1,14 +1,9 @@
 import React from "react";
 import { BgWrapper } from "../components/BgWrapper";
+import { Menu } from "../components/menu";
+import { Divider } from "../components/Divider";
 
 export const InvoiceView = () => {
-    
-    const input = document.getElementById('avatar');
-    const fileName = document.getElementById('file-name');
-    
-    input.addEventListener('change', () => {
-        fileName.textContent = input.files.length > 0 ? input.files[0].name : 'No file chosen';
-    });
 
     return (
         <BgWrapper>
@@ -24,29 +19,52 @@ export const InvoiceView = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center gap-4 border-1 w-64 border-white uppercase font-bold text-white tracking-wider rounded-4xl p-3 px-8 my-10">
+            <div className="flex items-center justify-center gap-4 border-1 w-64 border-white uppercase font-bold text-white tracking-wider cursor-pointer rounded-4xl p-2 px-8 my-10">
                 <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" hidden />
-                <label className="" for="avatar" class="file-upload">Upload Image</label>
-                <img src="/src/assets/fileIcon.svg" className="size-6" />
+                <label className="cursor-pointer" for="avatar" class="file-upload">Upload Image</label>
+                <img src="/src/assets/file-icon.svg" className="size-6" />
             </div>
 
-            <div className="flex justify-center items-center">
-                <div className="w-40 h-0.5 bg-white"></div>
-                <h6 className="uppercase text-white text-sm tracking-wider font-bold px-4">Commerciante</h6>
-                <div className="w-40 h-0.5 bg-white"></div>
-            </div>
+            <Divider label="Commerciante" />
 
             
+            <form className="text-white p-3 mt-6 flex flex-row justify-center items-center">
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nome" />
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="R.I.F" />
+            </form>
 
-            <div className="flex justify-center items-center">
-                <div className="w-47 h-0.5 bg-white"></div>
-                <h6 className="uppercase text-white text-sm tracking-wider font-bold px-4">Fattura</h6>
-                <div className="w-47 h-0.5 bg-white"></div>
+            <form className="text-white p-3 mb-6 flex flex-row justify-center items-center">
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Indirizzo" />
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº di Telefono" />
+            </form>
+
+            <Divider label="Fattura" />
+
+            <form className="text-white p-3 mt-6 flex flex-row justify-center items-center">
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº Fattura" />
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº di Controllo" />
+            </form>
+
+            <form className="text-white p-3 flex flex-row justify-center items-center">
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Base Imponibile" />
+                <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº di Telefono" />
+            </form>
+
+            <form className="text-white mt-4">
+                <input className="bg-white/30 h-10 w-102 rounded-3xl p-4 mx-3" placeholder="Totale" />
+            </form>
+
+            <button className="w-64 h-12 mt-12 bg-[var(--lightBlue-accent)] rounded-4xl text-white shadow-2xl hover:bg-[var(--blue-accent)] cursor-pointer transition-all duration-300 ease-in-out">
+                Genera Ricevuta
+            </button>
+
+
+            <div className="fixed bottom-3">
+                <Menu></Menu>
             </div>
 
-
-
             </div>
+
 
         </BgWrapper>
     )
