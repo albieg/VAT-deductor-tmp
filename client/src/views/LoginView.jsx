@@ -1,7 +1,6 @@
 import { truncates } from "bcryptjs";
 import React from "react";
 import { useState } from "react";
-import { BgWrapper } from "../components/BgWrapper";
 
 export const LoginView = () => {
     const [signup, setSignup] = useState(false)
@@ -37,9 +36,8 @@ export const LoginView = () => {
 
 
     return (
-        <BgWrapper>
-            <div className="flex h-screen w-screen items-center justify-center">
-            <div className="w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 bg-black/20 backdrop-blur-md rounded-3xl shadow-lg p-6 flex flex-col items-center">
+        <div className="flex h-screen w-screen items-center justify-center">
+            <div className="bg-black/12 w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 rounded-3xl shadow-lg p-6 flex flex-col items-center">
             
             <h1 className="text-white text-4xl font-bold p-6 h-36 w-full sm:w-9/12">
                 {login ? (
@@ -108,8 +106,6 @@ export const LoginView = () => {
                 </button>
             </div>
             </div>
-            </div>
-            
-        </BgWrapper>
+        </div>
     )
 }

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { BgWrapper } from "../components/BgWrapper";
 import { Menu } from "../components/menu";
 import { Divider } from "../components/Divider";
 import { CardInfo } from "../components/CardInfo";
 import { ExpandModal } from "../components/ExpandModal";
+import { Header } from "../components/Header";
 
 
 export const ProfileView = () => {
@@ -17,35 +17,59 @@ export const ProfileView = () => {
     const expandEmail = () => {
         setExpandedEmail(prev => !prev)
     }
-
     
 
     return (
-        <BgWrapper>
-            <div className="h-dvh w-full bg-black/30 flex flex-col items-center">
+        <div className="w-full h-screen  flex flex-col items-center">
 
-            <div className="h-36 w-full flex flex-col justify-center items-center gap-2 bg-white/40">
-                
+            <Header>
+                <div className="flex flex-col items-center justify-center p-6 gap-4">
                 <img src="/src/assets/profile-pic.jpg" className="size-16 rounded-4xl object-cover "></img>
-                
                 <div className="flex gap-2">
                     <h4>Francesco Catanzaro</h4>
                     <h4>•</h4>
                     <h4 className="uppercase">Suitco C.A.</h4>
                 </div>
-            </div>
+                </div>
+            </Header>
 
             <div className="bg-white/25 mt-6 rounded-2xl h-142 w-106 flex flex-col justify-center">
             
             <Divider label="Organizzazione" />
-            <CardInfo header="R.I.F" value="J-31169561-3"/>
-            <CardInfo header="Nome" value="Suito c.a."/>
-            <CardInfo onClick={expandAddress} header="Indirizzo" value="CALLE ORINOCO EDIF ARBICENTER PISO PB OF PB-3 URB LAS MERCEDES CARACAS MIRANDA ZONA POSTAL 1060" />
-            <CardInfo header="Nº di Telefono" value="Suito c.a."/>
-            <CardInfo header="Ritenuta %" value="100%"/>
-            <Divider label="Agente" />
-            <CardInfo header="Nome" value="Albie Guerriero"/>
-            <CardInfo onClick={expandEmail} header="Email" value="francescocatanzaro@gmail.com" />
+
+            <CardInfo
+            header="R.I.F"
+            value="J-31169561-3"
+            />
+            <CardInfo
+            header="Nome"
+            value="Suito c.a."
+            />
+            <CardInfo
+            onClick={expandAddress}
+            header="Indirizzo"
+            value="CALLE ORINOCO EDIF ARBICENTER PISO PB OF PB-3 URB LAS MERCEDES CARACAS MIRANDA ZONA POSTAL 1060"
+            />
+            <CardInfo
+            header="Nº di Telefono"
+            value="Suito c.a."
+            />
+            <CardInfo
+            header="Ritenuta %"
+            value="100%"
+            />
+
+            <Divider label="Agente"/>
+
+            <CardInfo
+            header="Nome"
+            value="Francesco Catanzaro"
+            />
+            <CardInfo
+            onClick={expandEmail}
+            header="Email"
+            value="francescocatanzaro@gmail.com"
+            />
 
             </div>
 
@@ -55,9 +79,8 @@ export const ProfileView = () => {
             </button>
 
 
-            <div className="fixed bottom-3">
-                    <Menu></Menu>
-            </div>
+            
+            <Menu></Menu>
 
             {
                 expandedAddress &&
@@ -77,9 +100,6 @@ export const ProfileView = () => {
                 />
             }
 
-            </div>
-
-        </BgWrapper>
-        
+        </div>  
     )
 }
