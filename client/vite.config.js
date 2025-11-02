@@ -8,4 +8,12 @@ export default defineConfig({
     react(),
      tailwindcss()
   ],
+  optimizeDeps: {
+  include: ["motion"]
+},
+ build: {
+    commonjsOptions: {
+      include: [/motion/, /node_modules/],
+    },
+  },
 })

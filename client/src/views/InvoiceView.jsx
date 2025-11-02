@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "../components/menu";
 import { Divider } from "../components/Divider";
 import { Header } from "../components/Header";
+import { InputBox } from "../components/InputBox";
 
 export const InvoiceView = () => {
     const [ expandedForm, setExpandedForm ] = useState(false)
@@ -29,7 +31,7 @@ export const InvoiceView = () => {
 
             <div className="flex flex-col justify-center items-center gap-6">
                 
-                <div className="flex items-center justify-center gap-4 border-1 w-64 border-white uppercase font-bold text-white tracking-wider cursor-pointer rounded-4xl p-2 px-8 mb-3 mt-3">
+                <div className="flex items-center justify-center gap-4 border-1 w-64 h-12 border-white uppercase font-bold text-white tracking-wider cursor-pointer rounded-4xl px-6 mb-4 mt-9 shadow-black/10 shadow-xl">
                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" hidden />
                     <label for="avatar" className="file-upload cursor-pointer">Upload Image</label>
                     <img src="/src/assets/file-icon.svg" className="size-6" />
@@ -38,33 +40,33 @@ export const InvoiceView = () => {
                 <Divider label="Commerciante" />
 
                 <form className="text-white p-1 flex flex-row justify-center items-center">
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nome" />
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="R.I.F" />
+                    <InputBox width="48" id="name" htmlFor="id" label="Nome"/>
+                    <InputBox width="48" id="rif" htmlFor="rif" label="R.I.F"/>
                 </form>
                 
                 <form className="text-white p-1 flex flex-row justify-center items-center">
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Indirizzo" />
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº di Telefono" />
+                    <InputBox width="48" id="address" htmlFor="address" label="Indirizzo"/>
+                    <InputBox width="48" id="phone" htmlFor="number" label="Nº di Telefono"/>
                 </form>
                 
                 <Divider label="Fattura" />
                 
                 <form className="text-white p-1 flex flex-row justify-center items-center">
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº Fattura" />
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Nº di Controllo" />
+                    <InputBox width="48" id="receipt_num" htmlFor="receipt_num" label="Nº Fattura"/>
+                    <InputBox width="48" id="control_num" htmlFor="control_num" label="Nº di Controllo"/>
                 </form>
                 
                 <form className="text-white p-1 flex flex-row justify-center items-center">
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="Base Imponibile" />
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4 mx-3" placeholder="VAT 16%" />
+                    <InputBox width="48" id="taxable_base" htmlFor="taxable_base" label="Base Imponibile"/>
+                    <InputBox width="48" id="vat_percentage" htmlFor="vat_percentage" label="VAT 16%"/>
                 </form>
                 
                 <form className="text-white p-1 flex flex-col justify-center items-center">
-                    <input className="bg-white/30 h-10 w-102 rounded-3xl p-4 mx-3" placeholder="Totale" />
+                    <InputBox width="102" id="total" htmlFor="total" label="Totale"/>
                 </form>
                 
                 <button onClick={expandForm} className="cursor-pointer p-1 text-white">
-                    <div className={`border-1 p-2 w-102 rounded-3xl flex items-center justify-center gap-3 ${expandedForm ? "border-white" : "border-white/30"}`}>
+                    <div className={`border-1 p-2 w-102 h-12 rounded-3xl flex items-center justify-center gap-3 shadow-black/10 shadow-xl ${expandedForm ? "border-white" : "border-white/30"}`}>
                         <h3>Aggiungi Voci</h3>
                         <img src="/src/assets/plus-sign.svg" className={`size-6 transform transition-transform duration-400 ${expandedForm ? "rotate-45" : "rotate-0"}`} />
                     </div>
@@ -75,27 +77,28 @@ export const InvoiceView = () => {
                 <div className="flex flex-col gap-5">
 
                     <form className="text-white p-1 flex flex-col justify-center items-center">
-                    <input className="bg-white/30 h-10 w-102 rounded-3xl p-4 mx-3" placeholder="Compras si Derecho a Crédito I.V.A." />
+                        <InputBox width="102" id="vat_free" htmlFor="vat_free" label="Compras si Derecho a Crédito I.V.A"
+                        />
                     </form>
                     
                     <Divider label="Nota di Debito / Credito" />
                     
                     <form className="text-white p-1 flex flex-row justify-center items-center gap-6">
                         
-                    <input className="bg-white/30 h-10 w-48 rounded-3xl p-4" placeholder="Nº di Referenza" />
+                        <InputBox width="48" id="ref_number" htmlFor="ref_number" label="Nº di Referenza"/>
 
-                    <div className="flex items-center justify-center bg-white/30 rounded-3xl w-48">
+                    <div className="flex items-center justify-center bg-white/30 rounded-3xl w-48 h-12 shadow-black/10 shadow-xl">
                         <input onClick={handleText} type="radio" id="debito" name="payment" value="debito" className="hidden peer/debito" defaultChecked/>
                         <label
                         htmlFor="debito"
-                        className="peer-checked/debito:bg-[var(--lightBlue-accent)] peer-checked/debito:text-white text-white/50 cursor-pointer px-6 py-2 rounded-full transition-all"
+                        className="peer-checked/debito:bg-[var(--lightBlue-accent)] peer-checked/debito:text-white text-white/50 cursor-pointer px-6 py-3 rounded-full transition-all"
                         >
                             Debito
                         </label>
                         <input onClick={handleText} type="radio" id="credito" name="payment" value="credito" className="hidden peer/credito" />
                         <label
                         htmlFor="credito"
-                        className="peer-checked/credito:bg-[var(--lightBlue-accent)] peer-checked/credito:text-white text-white/50 cursor-pointer px-6 py-2 rounded-full transition-all"
+                        className="peer-checked/credito:bg-[var(--lightBlue-accent)] peer-checked/credito:text-white text-white/50 cursor-pointer px-6 py-3 rounded-full transition-all"
                         >
                             Credito
                         </label>
@@ -103,13 +106,14 @@ export const InvoiceView = () => {
                     </form>
 
                     <form className="text-white p-2">
-                        <input className="bg-white/30 h-10 w-102 rounded-3xl p-4 mx-3" placeholder={`Quota di ${debtChecked ? "Debito" : "Credito"}`} />
+                        <InputBox width="102" id="debt/cred_note" htmlFor="debt/cred_note" label={`Quota di ${debtChecked ? "Debito" : "Credito"}`}
+                        />
                     </form>
 
                 </div>
                 }
                 
-                <button className="w-64 h-12 mb-6 mt-3 bg-[var(--lightBlue-accent)] rounded-4xl text-white shadow-2xl hover:bg-[var(--blue-accent)] cursor-pointer transition-all duration-300 ease-in-out">
+                <button className="w-64 h-12 mb-10 mt-3 bg-[var(--lightBlue-accent)] rounded-4xl text-white uppercase font-bold tracking-wider hover:bg-[var(--blue-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 shadow-xl">
                     Genera Ricevuta
                 </button>
 
