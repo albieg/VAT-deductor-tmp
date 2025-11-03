@@ -76,6 +76,8 @@ db.exec(`
         contact_name TEXT UNIQUE,
         contact_email CITEXT NOT NULL UNIQUE,
         contact_phone_number TEXT CHECK (phone ~ '^\+\d{1,15}$'),
+        contact_rif TEXT,
+        contact_address TEXT
     )
 `)
 

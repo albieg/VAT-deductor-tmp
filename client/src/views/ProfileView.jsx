@@ -94,9 +94,7 @@ export const ProfileView = () => {
 
 
             { editInfo &&
-
             <>
-
             <div className="h-full flex flex-col justify-center items-center gap-7 mt-9">
 
                 <Divider label="Organizzazione" />
@@ -129,16 +127,13 @@ export const ProfileView = () => {
                     <img src="/src/assets/check.svg" className="size-5" />
                 </button>
 
-
             </div>
             </>
-
-
             }
-
 
             
             <Menu></Menu>
+
 
             {
                 expandedAddress &&

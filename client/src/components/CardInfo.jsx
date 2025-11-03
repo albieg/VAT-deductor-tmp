@@ -9,7 +9,7 @@ export const CardInfo = ({onClick, header, value, divider, width}) => {
             <p className="font-bold truncate">{value}</p>
         </div>
         { divider &&
-        <div className="w-80 h-0.5 bg-white/20 mt-1"></div>
+        <div className="w-80 h-0.5 bg-white/20 mt-1"/>
         }
         </div>
     )
