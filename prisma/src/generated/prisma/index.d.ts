@@ -264,8 +264,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.18.0
-   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
+   * Prisma Client JS version: 6.19.0
+   * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
    */
   export type PrismaVersion = {
     client: string
@@ -6051,6 +6051,8 @@ export namespace Prisma {
     contName: string | null
     contEmail: string | null
     contPhone: string | null
+    contRif: string | null
+    contAddr: string | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -6059,6 +6061,8 @@ export namespace Prisma {
     contName: string | null
     contEmail: string | null
     contPhone: string | null
+    contRif: string | null
+    contAddr: string | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -6067,6 +6071,8 @@ export namespace Prisma {
     contName: number
     contEmail: number
     contPhone: number
+    contRif: number
+    contAddr: number
     _all: number
   }
 
@@ -6085,6 +6091,8 @@ export namespace Prisma {
     contName?: true
     contEmail?: true
     contPhone?: true
+    contRif?: true
+    contAddr?: true
   }
 
   export type ContactMaxAggregateInputType = {
@@ -6093,6 +6101,8 @@ export namespace Prisma {
     contName?: true
     contEmail?: true
     contPhone?: true
+    contRif?: true
+    contAddr?: true
   }
 
   export type ContactCountAggregateInputType = {
@@ -6101,6 +6111,8 @@ export namespace Prisma {
     contName?: true
     contEmail?: true
     contPhone?: true
+    contRif?: true
+    contAddr?: true
     _all?: true
   }
 
@@ -6196,6 +6208,8 @@ export namespace Prisma {
     contName: string
     contEmail: string
     contPhone: string
+    contRif: string
+    contAddr: string
     _count: ContactCountAggregateOutputType | null
     _avg: ContactAvgAggregateOutputType | null
     _sum: ContactSumAggregateOutputType | null
@@ -6223,6 +6237,8 @@ export namespace Prisma {
     contName?: boolean
     contEmail?: boolean
     contPhone?: boolean
+    contRif?: boolean
+    contAddr?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6231,6 +6247,8 @@ export namespace Prisma {
     contName?: boolean
     contEmail?: boolean
     contPhone?: boolean
+    contRif?: boolean
+    contAddr?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6239,6 +6257,8 @@ export namespace Prisma {
     contName?: boolean
     contEmail?: boolean
     contPhone?: boolean
+    contRif?: boolean
+    contAddr?: boolean
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectScalar = {
@@ -6247,9 +6267,11 @@ export namespace Prisma {
     contName?: boolean
     contEmail?: boolean
     contPhone?: boolean
+    contRif?: boolean
+    contAddr?: boolean
   }
 
-  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contType" | "contName" | "contEmail" | "contPhone", ExtArgs["result"]["contact"]>
+  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contType" | "contName" | "contEmail" | "contPhone" | "contRif" | "contAddr", ExtArgs["result"]["contact"]>
 
   export type $ContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contact"
@@ -6260,6 +6282,8 @@ export namespace Prisma {
       contName: string
       contEmail: string
       contPhone: string
+      contRif: string
+      contAddr: string
     }, ExtArgs["result"]["contact"]>
     composites: {}
   }
@@ -6688,6 +6712,8 @@ export namespace Prisma {
     readonly contName: FieldRef<"Contact", 'String'>
     readonly contEmail: FieldRef<"Contact", 'String'>
     readonly contPhone: FieldRef<"Contact", 'String'>
+    readonly contRif: FieldRef<"Contact", 'String'>
+    readonly contAddr: FieldRef<"Contact", 'String'>
   }
     
 
@@ -7137,7 +7163,9 @@ export namespace Prisma {
     contType: 'contType',
     contName: 'contName',
     contEmail: 'contEmail',
-    contPhone: 'contPhone'
+    contPhone: 'contPhone',
+    contRif: 'contRif',
+    contAddr: 'contAddr'
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
@@ -7587,6 +7615,8 @@ export namespace Prisma {
     contName?: StringFilter<"Contact"> | string
     contEmail?: StringFilter<"Contact"> | string
     contPhone?: StringFilter<"Contact"> | string
+    contRif?: StringFilter<"Contact"> | string
+    contAddr?: StringFilter<"Contact"> | string
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -7595,6 +7625,8 @@ export namespace Prisma {
     contName?: SortOrder
     contEmail?: SortOrder
     contPhone?: SortOrder
+    contRif?: SortOrder
+    contAddr?: SortOrder
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -7606,6 +7638,8 @@ export namespace Prisma {
     NOT?: ContactWhereInput | ContactWhereInput[]
     contType?: BoolFilter<"Contact"> | boolean
     contPhone?: StringFilter<"Contact"> | string
+    contRif?: StringFilter<"Contact"> | string
+    contAddr?: StringFilter<"Contact"> | string
   }, "id" | "contName" | "contEmail">
 
   export type ContactOrderByWithAggregationInput = {
@@ -7614,6 +7648,8 @@ export namespace Prisma {
     contName?: SortOrder
     contEmail?: SortOrder
     contPhone?: SortOrder
+    contRif?: SortOrder
+    contAddr?: SortOrder
     _count?: ContactCountOrderByAggregateInput
     _avg?: ContactAvgOrderByAggregateInput
     _max?: ContactMaxOrderByAggregateInput
@@ -7630,6 +7666,8 @@ export namespace Prisma {
     contName?: StringWithAggregatesFilter<"Contact"> | string
     contEmail?: StringWithAggregatesFilter<"Contact"> | string
     contPhone?: StringWithAggregatesFilter<"Contact"> | string
+    contRif?: StringWithAggregatesFilter<"Contact"> | string
+    contAddr?: StringWithAggregatesFilter<"Contact"> | string
   }
 
   export type UserCreateInput = {
@@ -7998,6 +8036,8 @@ export namespace Prisma {
     contName: string
     contEmail: string
     contPhone: string
+    contRif: string
+    contAddr: string
   }
 
   export type ContactUncheckedCreateInput = {
@@ -8006,6 +8046,8 @@ export namespace Prisma {
     contName: string
     contEmail: string
     contPhone: string
+    contRif: string
+    contAddr: string
   }
 
   export type ContactUpdateInput = {
@@ -8013,6 +8055,8 @@ export namespace Prisma {
     contName?: StringFieldUpdateOperationsInput | string
     contEmail?: StringFieldUpdateOperationsInput | string
     contPhone?: StringFieldUpdateOperationsInput | string
+    contRif?: StringFieldUpdateOperationsInput | string
+    contAddr?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -8021,6 +8065,8 @@ export namespace Prisma {
     contName?: StringFieldUpdateOperationsInput | string
     contEmail?: StringFieldUpdateOperationsInput | string
     contPhone?: StringFieldUpdateOperationsInput | string
+    contRif?: StringFieldUpdateOperationsInput | string
+    contAddr?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactCreateManyInput = {
@@ -8029,6 +8075,8 @@ export namespace Prisma {
     contName: string
     contEmail: string
     contPhone: string
+    contRif: string
+    contAddr: string
   }
 
   export type ContactUpdateManyMutationInput = {
@@ -8036,6 +8084,8 @@ export namespace Prisma {
     contName?: StringFieldUpdateOperationsInput | string
     contEmail?: StringFieldUpdateOperationsInput | string
     contPhone?: StringFieldUpdateOperationsInput | string
+    contRif?: StringFieldUpdateOperationsInput | string
+    contAddr?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactUncheckedUpdateManyInput = {
@@ -8044,6 +8094,8 @@ export namespace Prisma {
     contName?: StringFieldUpdateOperationsInput | string
     contEmail?: StringFieldUpdateOperationsInput | string
     contPhone?: StringFieldUpdateOperationsInput | string
+    contRif?: StringFieldUpdateOperationsInput | string
+    contAddr?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8418,6 +8470,8 @@ export namespace Prisma {
     contName?: SortOrder
     contEmail?: SortOrder
     contPhone?: SortOrder
+    contRif?: SortOrder
+    contAddr?: SortOrder
   }
 
   export type ContactAvgOrderByAggregateInput = {
@@ -8430,6 +8484,8 @@ export namespace Prisma {
     contName?: SortOrder
     contEmail?: SortOrder
     contPhone?: SortOrder
+    contRif?: SortOrder
+    contAddr?: SortOrder
   }
 
   export type ContactMinOrderByAggregateInput = {
@@ -8438,6 +8494,8 @@ export namespace Prisma {
     contName?: SortOrder
     contEmail?: SortOrder
     contPhone?: SortOrder
+    contRif?: SortOrder
+    contAddr?: SortOrder
   }
 
   export type ContactSumOrderByAggregateInput = {

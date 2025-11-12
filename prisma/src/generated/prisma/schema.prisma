@@ -82,4 +82,6 @@ model Contact {
   contName  String  @unique @map("contact_name")
   contEmail String  @unique @map("contact_email")
   contPhone String  @map("contact_phone_number")
+  contRif   String  @map("contact_rif")
+  contAddr  String  @map("contact_address")
 }

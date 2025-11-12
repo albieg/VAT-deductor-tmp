@@ -5,7 +5,7 @@ import { Divider } from "../components/Divider";
 import { CardInfo } from "../components/CardInfo";
 import { ExpandModal } from "../components/ExpandModal";
 import { Header } from "../components/Header";
-import { EditBox } from "./EditBox";
+import { EditBox } from "../components/EditBox";
 
 
 export const ProfileView = () => {
@@ -27,7 +27,7 @@ export const ProfileView = () => {
      
 
     return (
-        <div className="w-full h-screen  flex flex-col items-center">
+        <div className="w-full min-h-screen flex flex-col items-center">
 
             <Header>
                 <div className="flex flex-col items-center justify-center p-6 gap-4">
@@ -44,36 +44,36 @@ export const ProfileView = () => {
             { !editInfo &&
 
             <>
-            <div className="bg-white/25 mt-6 rounded-2xl h-142 w-106 flex flex-col justify-center">
+            <div className="bg-[var(--blue-accent)]/20 mt-6 rounded-2xl h-142 w-106 flex flex-col justify-center">
                 
-                <Divider label="Organizzazione" />
+                <Divider label="Empresa" />
                 
                 <CardInfo
                 header="R.I.F"
                 value="J-31169561-3"
                 />
                 <CardInfo
-                header="Nome"
+                header="Nombre"
                 value="Suito c.a."
                 />
                 <CardInfo
                 onClick={expandAddress}
-                header="Indirizzo"
+                header="Dirección"
                 value="CALLE ORINOCO EDIF ARBICENTER PISO PB OF PB-3 URB LAS MERCEDES CARACAS MIRANDA ZONA POSTAL 1060"
                 />
                 <CardInfo
-                header="Nº di Telefono"
+                header="Nº de Teléfono"
                 value="Suito c.a."
                 />
                 <CardInfo
-                header="Ritenuta %"
+                header="Retención %"
                 value="100%"
                 />
 
                 <Divider label="Agente"/>
 
                 <CardInfo
-                header="Nome"
+                header="Nombre"
                 value="Francesco Catanzaro"
                 />
                 <CardInfo
@@ -84,9 +84,8 @@ export const ProfileView = () => {
 
             </div>
 
-            <button onClick={editButton} className="flex items-center justify-center gap-4 border-1 w-64 h-12 border-white uppercase font-bold text-white tracking-wider rounded-4xl p-2 px-8 my-10 cursor-pointer">
-                <div className="" for="avatar" class="file-upload">Modifica Info</div>
-                <img src="/src/assets/pen.svg" className="size-4" />
+            <button onClick={editButton} className="w-80 h-12 mb-10 mt-6 rounded-4xl uppercase font-bold tracking-wider text-[var(--orange-accent)] border-2 border-[var(--orange-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 hover:shadow-amber-600/40 shadow-lg">
+                Editar información
             </button>
 
             </>
@@ -97,34 +96,33 @@ export const ProfileView = () => {
             <>
             <div className="h-full flex flex-col justify-center items-center gap-7 mt-9">
 
-                <Divider label="Organizzazione" />
+                <Divider label="Empresa" />
                 
                 <form className="text-white flex flex-row justify-center items-center">
                     <EditBox width="48" label="R.I.F" placeholder="J-31169561-3" />
-                    <EditBox width="48" label="Nome" placeholder="SUITCO C.A." />
+                    <EditBox width="48" label="Nombre" placeholder="SUITCO C.A." />
                 </form>
                 <form className="text-white flex flex-row justify-center items-center">
-                    <EditBox width="102" label="Indirizzo Fiscale" placeholder="J-31169561-3" />
+                    <EditBox width="102" label="Dirección Fiscal" placeholder="J-31169561-3" />
                 </form>
                 <form className="text-white flex flex-row justify-center items-center">
-                    <EditBox width="48" label="Numero" placeholder="3547382938" />
-                    <EditBox width="48" label="Ritenuta %" placeholder="100%" />
+                    <EditBox width="48" label="Nº de Teléfono" placeholder="3547382938" />
+                    <EditBox width="48" label="Retención %" placeholder="100%" />
                 </form>
 
                 <Divider label="Agente" />
 
                 <form className="text-white flex flex-row justify-center items-center">
-                    <EditBox width="48" label="Nome" placeholder="Francesco" />
-                    <EditBox width="48" label="Cognome" placeholder="Catanzaro" />
+                    <EditBox width="48" label="Nombre" placeholder="Francesco" />
+                    <EditBox width="48" label="Apellidos" placeholder="Catanzaro" />
                 </form>
                 <form className="text-white flex flex-row justify-center items-center">
-                    <EditBox width="102" label="E-mail" placeholder="francescocatanzaro@gmail.com" />
+                    <EditBox width="102" label="Email" placeholder="francescocatanzaro@gmail.com" />
                 </form>
 
 
-                <button onClick={editButton} className="flex items-center justify-center gap-3 w-64 h-12 mb-10 mt-3 bg-[var(--lightBlue-accent)] rounded-4xl text-white uppercase font-bold tracking-wider hover:bg-[var(--blue-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 shadow-xl">
-                    <div>Conferma</div>
-                    <img src="/src/assets/check.svg" className="size-5" />
+                <button onClick={editButton} className="w-80 h-12 mb-10 mt-3 rounded-4xl uppercase font-bold tracking-wider text-white bg-[var(--orange-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 hover:shadow-amber-600/40 shadow-xl">
+                    Confirmar
                 </button>
 
             </div>
@@ -132,14 +130,14 @@ export const ProfileView = () => {
             }
 
             
-            <Menu></Menu>
+            <Menu/>
 
 
             {
                 expandedAddress &&
                 <ExpandModal 
                 onClick={expandAddress}
-                title="Indirizzo"
+                title="Dirección"
                 content="CALLE ORINOCO EDIF ARBICENTER PISO PB OF PB-3 URB LAS MERCEDES CARACAS MIRANDA ZONA POSTAL 1060"
                 />
             }

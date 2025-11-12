@@ -1,6 +1,7 @@
-import { truncates } from "bcryptjs";
-import React from "react";
 import { useState } from "react";
+import { Logo } from "../components/Logo";
+import { InputBox } from "../components/InputBox";
+
 
 export const LoginView = () => {
     const [signup, setSignup] = useState(false)
@@ -37,73 +38,56 @@ export const LoginView = () => {
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
-            <div className="bg-black/12 w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 rounded-3xl shadow-lg p-6 flex flex-col items-center">
+            <div className="bg-white/10 w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 rounded-3xl shadow-gray-500/50 shadow-xl p-6 flex flex-col items-center">
             
-            <h1 className="text-white text-4xl font-bold p-6 h-36 w-full sm:w-9/12">
+            <h1 className="text-[var(--darkBlue-accent)] text-3xl font-bold pt-6 mb-8 h-36 w-80">
                 {login ? (
                     <>
-                    Log in to <br /> your account
+                    Inicie sesión <br /> en su cuenta de <br /> <Logo/> 
                     </>
                     ) : (
                     <>
-                    Sign up to <br /> App Name
+                    Cree una cuenta de <br /> <Logo/>
                     </>
                 )}
             </h1>
 
-            <div className="p-6 pb-32 flex w-full sm:w-9/12 h-115 flex-col justify-end">
-            { signup &&
-            <form className="mb-8">
-                <input className="
-                border-b-white/40 border-b-1 focus:border-b-white 
-                outline-none ring-0 
-                bg-transparent text-white w-full
-                transition-all duration-400 ease-in-out
-                " 
-                type="text" placeholder="Username" name="Username"/>
-            </form>
-            }
+            <div className="p-6 pb-32 flex w-full sm:w-9/12 h-119 flex-col justify-end items-center gap-6">
+                { signup &&
+                <InputBox width="80" id="username" htmlFor="username" label="Nombre de Usuario"/>
+                }
 
-            <form className="mb-8">
-                <input className="
-                border-b-white/40 border-b-1 focus:border-b-white 
-                outline-none ring-0 
-                bg-transparent text-white w-full
-                transition-all duration-400 ease-in-out
-                " 
-                type="text" placeholder="Email" name="Email"/>
-            </form>
+                <InputBox width="80" id="email" htmlFor="email" label="Email"/>
 
-            <form className="mb-12">
-                <input className="
-                border-b-white/40 border-b-1 focus:border-b-white 
-                outline-none ring-0 
-                bg-transparent text-white w-full
-                transition-all duration-400 ease-in-out
-                " 
-                type="text" placeholder="Password" name="Password"/>
-            </form>
+                <InputBox width="80" id="password" htmlFor="password" label="Contraseña"/>
+                
+                <button className="w-80 h-12 mb-9 mt-6 rounded-4xl uppercase font-bold tracking-wider text-white bg-[var(--orange-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 hover:shadow-amber-600/40 shadow-xl">
+                    { login ? "Iniciar Sesión" : "Registrarse" }
+                </button>
 
-            <button className="w-full h-12 bg-[var(--lightBlue-accent)] rounded-4xl text-white shadow-2xl hover:bg-[var(--blue-accent)] cursor-pointer transition-all duration-300 ease-in-out">
-                { login ? "Login" : "Sign up" }
-            </button>
+                { login &&
+                <button className="text-[var(--blue-accent)]/60 hover:text-[var(--blue-accent)] text-sm cursor-pointer">
+                    ¿Olvidó su contraseña?
+                </button>
+                }
 
             </div>
 
-            <div className="max-w-60 flex justify-center items-center gap-24">
+            <div className="max-w-80 flex justify-center items-center gap-14">
                 <button
                 onClick={handleLogin}
-                className={login ? "uppercase text-sm text-white font-bold underline hover:underline underline-offset-6 transition-all duration-300 ease-in-out" : "uppercase text-sm text-white/70 font-medium hover:underline underline-offset-6 transition-all duration-300 ease-in-out"}
+                className={login ? "uppercase text-sm text-[var(--darkBlue-accent)] font-bold underline hover:underline underline-offset-6 transition-all duration-300 ease-in-out" : "uppercase text-sm text-[var(--blue-accent)]/60 font-medium hover:underline underline-offset-6 transition-all duration-300 ease-in-out"}
                 >
-                    Log in
+                    Iniciar sesión
                 </button >
 
                 <button
                 onClick={handleSignup}
-                className={signup ? "uppercase text-sm text-white font-bold underline hover:underline underline-offset-6 transition-all duration-300 ease-in-out" : "uppercase text-sm text-white/70 font-medium hover:underline underline-offset-6 transition-all duration-300 ease-in-out"}
+                className={signup ? "uppercase text-sm text-[var(--darkBlue-accent)] font-bold underline hover:underline underline-offset-6 transition-all duration-300 ease-in-out" : "uppercase text-sm text-[var(--blue-accent)]/60 font-medium hover:underline underline-offset-6 transition-all duration-300 ease-in-out"}
                 >
-                    Sign up
+                    Registrarse
                 </button>
+
             </div>
             </div>
         </div>

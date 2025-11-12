@@ -9,8 +9,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --lightBlue-accent : #608dff;
-  --blue-accent : #457aff;
+  --lightBlue-accent : #a6c0cd;
+  --blue-accent : #2f6684;
+  --darkBlue-accent: #0a0d25;
+  --orange-accent : #ff844b;
 }
 
 html, body, #root {
@@ -19,7 +21,7 @@ html, body, #root {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-image: url(/src/assets/background2.jpeg);
+  background-color: #d7e2e8;
   background-size: cover;
 }
 
@@ -32,13 +34,16 @@ html, body, #root {
   }
 }
 
-input {
-  caret-color: #ffff;
-}
-
 input:invalid {
   border: 1px solid red;
 }
 :focus {
   outline: none;
+}
+
+.montserrat-700 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
