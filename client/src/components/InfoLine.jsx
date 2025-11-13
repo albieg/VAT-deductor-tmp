@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CardInfo = ({onClick, header, value, divider, width}) => {
+export const InfoLine = ({onClick, header, value, divider, width}) => {
     return (
         <div className="flex flex-col justify-center items-center">
         <div onClick={onClick} className={onClick? "text-[var(--blue-accent)] text-sm px-6 py-6 cursor-pointer w-full flex flex-row justify-between" : "text-[var(--blue-accent)] text-sm px-6 py-6 w-full flex flex-row justify-between"}>

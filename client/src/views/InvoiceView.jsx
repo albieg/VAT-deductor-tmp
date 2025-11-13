@@ -31,7 +31,7 @@ export const InvoiceView = () => {
 
             <div className="flex flex-col justify-center items-center gap-6">
                 
-                <div className="border-2 w-64 h-12 border-[var(--blue-accent)]/80 uppercase font-bold text-[var(--blue-accent)] tracking-wider cursor-pointer rounded-4xl px-6 mb-4 mt-9 shadow-black/10 shadow-xl">
+                <div className="border-2 w-64 h-12 border-[var(--blue-accent)]/80 uppercase font-bold text-[var(--blue-accent)] tracking-wider cursor-pointer rounded-4xl px-6 mb-3 mt-7 shadow-black/10 shadow-xl">
                     <input type="file" id="receipt" name="receipt" accept="image/png, image/jpeg" hidden />
                     <label htmlFor="receipt" className="file-upload cursor-pointer flex items-center justify-center gap-2 w-full h-full">
                     Cargar recibo
@@ -115,7 +115,7 @@ export const InvoiceView = () => {
                 </div>
                 }
                 
-                <button className="w-80 h-12 mb-9 mt-3 rounded-4xl uppercase font-bold tracking-wider text-white bg-[var(--orange-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 hover:shadow-amber-600/40 shadow-xl">
+                <button className="w-80 h-12 mb-28 mt-3 rounded-4xl uppercase font-bold tracking-wider text-white bg-[var(--orange-accent)] cursor-pointer transition-all duration-300 ease-in-out shadow-black/10 hover:shadow-amber-600/40 shadow-xl">
                     Generar factura
                 </button>
 

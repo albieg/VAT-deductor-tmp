@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react"
 import { Menu } from "../components/menu";
 import { Divider } from "../components/Divider";
-import { CardInfo } from "../components/CardInfo";
+import { InfoLine } from "../components/InfoLine";
 import { ExpandModal } from "../components/ExpandModal";
 import { Header } from "../components/Header";
 import { EditBox } from "../components/EditBox";
@@ -48,35 +48,35 @@ export const ProfileView = () => {
                 
                 <Divider label="Empresa" />
                 
-                <CardInfo
+                <InfoLine
                 header="R.I.F"
                 value="J-31169561-3"
                 />
-                <CardInfo
+                <InfoLine
                 header="Nombre"
                 value="Suito c.a."
                 />
-                <CardInfo
+                <InfoLine
                 onClick={expandAddress}
                 header="Dirección"
                 value="CALLE ORINOCO EDIF ARBICENTER PISO PB OF PB-3 URB LAS MERCEDES CARACAS MIRANDA ZONA POSTAL 1060"
                 />
-                <CardInfo
+                <InfoLine
                 header="Nº de Teléfono"
                 value="Suito c.a."
                 />
-                <CardInfo
+                <InfoLine
                 header="Retención %"
                 value="100%"
                 />
 
                 <Divider label="Agente"/>
 
-                <CardInfo
+                <InfoLine
                 header="Nombre"
                 value="Francesco Catanzaro"
                 />
-                <CardInfo
+                <InfoLine
                 onClick={expandEmail}
                 header="Email"
                 value="francescocatanzaro@gmail.com"

@@ -6,13 +6,14 @@ import { Menu } from "../components/menu";
 import { Divider } from "../components/Divider";
 
 export const AddContactView = () => {
-    const [ contactType, setContactType ] = useState(true);
+    const [ contactType, setContactType ] = useState("vendor");
 
-    const contType1 = () => {
-        { contactType && setContactType(false)}
+    const vendorToggle = () => {
+        setContactType("vendor")
     }
-    const contType2 = () => {
-        { !contactType && setContactType(true)}
+
+    const accountantToggle = () => {
+        setContactType("accountant")
     }
 
     return(
@@ -21,7 +22,7 @@ export const AddContactView = () => {
             <div className="flex justify-start items-center h-18 p-4 px-6">
                 <Link to="/contacts">
                     <h1 className="uppercase font-extrabold text-[var(--darkBlue-accent)] text-xl tracking-widest flex items-center cursor-pointer">
-                        <img src="/src/assets/arrow-left.svg" alt="volver" className="w-10 h-10" />
+                        <img src="/src/assets/goBack-icon.svg" alt="volver" className="w-10 h-10" />
                         Volver
                     </h1>
                 </Link>
@@ -35,7 +36,7 @@ export const AddContactView = () => {
             <div className="flex flex-col justify-center items-center mt-14">
         
                 <div className="flex items-center justify-center bg-[white/10] border-2 border-[var(--lightBlue-accent)] rounded-3xl w-80 h-12 mb-10 shadow-black/10 shadow-xl">
-                    <input onClick={contType1} type="radio" id="vendor" name="contact" value="vendor" className="hidden peer/vendor" defaultChecked/>
+                    <input onClick={vendorToggle} type="radio" id="vendor" name="contact" value="vendor" className="hidden peer/vendor" defaultChecked/>
                     <label
                     htmlFor="vendor"
                     className="peer-checked/vendor:bg-[var(--lightBlue-accent)] peer-checked/vendor:text-white text-[var(--lightBlue-accent)] cursor-pointer px-6 py-3 w-40 text-center rounded-full transition-all"
@@ -43,7 +44,7 @@ export const AddContactView = () => {
                         Proveedor
                     </label>
 
-                    <input onClick={contType2} type="radio" id="accountant" name="contact" value="accountant" className="hidden peer/accountant" />
+                    <input onClick={accountantToggle} type="radio" id="accountant" name="contact" value="accountant" className="hidden peer/accountant" />
                     <label
                     htmlFor="accountant"
                     className="peer-checked/accountant:bg-[var(--lightBlue-accent)] peer-checked/accountant:text-white text-[var(--lightBlue-accent)] cursor-pointer px-6 py-3 w-40 text-center rounded-full transition-all"
@@ -55,7 +56,7 @@ export const AddContactView = () => {
         
                 <div className="h-72 flex flex-col justify-center items-center gap-6">
         
-                    {!contactType &&
+                    { contactType === "vendor" &&
                         <div>
                             <form className="text-white p-4 flex flex-row justify-center items-center">
                                 <InputBox width="48" id="name" htmlFor="name" label="Nombre"/>
@@ -73,7 +74,7 @@ export const AddContactView = () => {
                         </div>
                     }
         
-                    {contactType && 
+                    { contactType === "accountant" && 
                         <div>
                             <form className="text-white p-4 flex flex-row justify-center items-center">
                                 <InputBox width="48" id="name" htmlFor="name" label="Nombre"/>

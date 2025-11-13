@@ -38,21 +38,22 @@ export const LoginView = () => {
 
     return (
         <div className="flex h-screen w-screen items-center justify-center">
-            <div className="bg-white/10 w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 rounded-3xl shadow-gray-500/50 shadow-xl p-6 flex flex-col items-center">
+            <div className="bg-white/30 w-96 sm:w-106 md:w-126 xl:w-156 h-10/12 rounded-3xl shadow-gray-500/50 shadow-xl p-6 flex flex-col items-center">
             
-            <h1 className="text-[var(--darkBlue-accent)] text-3xl font-bold pt-6 mb-8 h-36 w-80">
+            <h1 className="text-[var(--darkBlue-accent)] text-xl font-medium pt-6 mb-6 h-36 w-80 flex flex-col gap-2">
                 {login ? (
                     <>
-                    Inicie sesión <br /> en su cuenta de <br /> <Logo/> 
+                    Inicie sesión en su cuenta de 
                     </>
                     ) : (
                     <>
-                    Cree una cuenta de <br /> <Logo/>
+                    Cree una cuenta de
                     </>
                 )}
+                <Logo />
             </h1>
 
-            <div className="p-6 pb-32 flex w-full sm:w-9/12 h-119 flex-col justify-end items-center gap-6">
+            <div className="p-6 pb-28 flex w-full sm:w-9/12 h-119 flex-col justify-end items-center gap-6">
                 { signup &&
                 <InputBox width="80" id="username" htmlFor="username" label="Nombre de Usuario"/>
                 }

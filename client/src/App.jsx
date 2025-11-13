@@ -6,6 +6,9 @@ import { InvoiceView } from "./views/InvoiceView"
 import { ProfileView } from "./views/ProfileView"
 import { ContactsView } from "./views/ContactsView"
 import { AddContactView } from "./views/AddContactView"
+import { ArchiveView } from "./views/ArchiveView";
+import { SettingsView } from "./views/SettingsView";
+
 
 function App() {
 
@@ -19,6 +22,8 @@ function App() {
         <Route path="/profile" element={<ProfileView />} />
         <Route path="/contacts" element={<ContactsView />} />
         <Route path="/add-contact" element={<AddContactView />} />
+        <Route path="/archive" element={<ArchiveView />} />
+        <Route path="/settings" element={<SettingsView />} />
         <Route path="*" element={<h1 style={{ color: "red" }}>No match found</h1>} />
 
       </Routes>
