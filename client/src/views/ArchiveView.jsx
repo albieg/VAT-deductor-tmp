@@ -1,7 +1,9 @@
-import {useState} from "react";
+import { useState } from "react";
+import { motion } from "motion/react"
 import { Header } from "../components/Header";
 import { Menu } from "../components/menu";
 import { InfoLine } from "../components/InfoLine";
+import { FadeAnimation } from "../utils/FadeAnimation";
 
 export const ArchiveView = () => {
     const [ expanded, setExpanded ] = useState(false);
@@ -12,6 +14,9 @@ export const ArchiveView = () => {
 
     return(
         <div>
+
+            <FadeAnimation>
+
             <Header>
                 { !expanded &&
                 <div className="flex flex-col items-center justify-center h-26 px-6 gap-3">
@@ -67,6 +72,8 @@ export const ArchiveView = () => {
             </div>
 
             }
+            
+            </FadeAnimation>
 
             <Menu />
 

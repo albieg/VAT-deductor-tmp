@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Divider } from "../components/Divider";
 import { Menu } from "../components/menu";
 import { InfoLine } from "../components/InfoLine";
 import { Header } from "../components/Header";
-import { Link } from "react-router-dom";
+import { ContactCard } from "../components/ContactCard";
+import { FadeAnimation } from "../utils/FadeAnimation";
 
 export const ContactsView = () => {
     const [ expandedCont, setExpandedCont ] = useState(false);
@@ -13,7 +15,8 @@ export const ContactsView = () => {
     }
 
     return (
-        <div className="flex flex-col items-center h-full">
+        <div>
+            <FadeAnimation>
 
             <Header>
                 <div className="flex flex-row justify-between items-center h-20 p-4 px-6">
@@ -40,8 +43,7 @@ export const ContactsView = () => {
                 </div>
             </Header>
 
-            {!expandedCont &&
-            <>
+            { !expandedCont &&
             <div className="py-6 pb-28 flex flex-col justify-center items-center">
 
                 <Divider label="Proveedores" />
@@ -121,41 +123,20 @@ export const ContactsView = () => {
                 />
 
             </div>
-
-            </>
             }
             
             
-            {   expandedCont &&
-                    <div className="h-full w-80 flex flex-col items-center mt-12">
-                        <h1 className="text-[var(--darkBlue-accent)] text-2xl font-bold mb-18">Commerciante 1</h1>
-                        
-                        <div className="flex flex-col mb-8">
-                        <h6 className="text-[var(--blue-accent)]/80 select-none mb-1.5">R.I.F.</h6>
-                        <p className="text-[var(--blue-accent)] font-semibold">J-765432345-2</p>
-                        <div className="w-80 h-0.5 bg-[var(--blue-accent)]/10 mt-2"/>
-                        </div>
-
-                        <div className="flex flex-col mb-8">
-                        <h6 className="text-[var(--blue-accent)]/80 select-none mb-1.5">Email</h6>
-                        <p className="text-[var(--blue-accent)] font-semibold">commerciante1@gmail.com</p>
-                        <div className="w-80 h-0.5 bg-[var(--blue-accent)]/10 mt-2"/>
-                        </div>
-
-                        <div className="flex flex-col mb-8">
-                        <h6 className="text-[var(--blue-accent)]/80 select-none mb-1.5">Nº de Teléfono</h6>
-                        <p className="text-[var(--blue-accent)] font-semibold">3209876783</p>
-                        <div className="w-80 h-0.5 bg-[var(--blue-accent)]/10 mt-2"/>
-                        </div>
-
-                        <div className="flex flex-col mb-8">
-                        <h6 className="text-[var(--blue-accent)]/80 select-none mb-1.5">Dirección Fiscal</h6>
-                        <p className="text-[var(--blue-accent)] font-semibold">Calle Orinco Edif. Arbiacenter Piso PB OF PB-3 URB Las Merces Caracas Miranda Zone Postal 1060</p>
-                        <div className="w-80 h-0.5 bg-[var(--blue-accent)]/10 mt-2"/>
-                        </div>
-                    </div>
+            { expandedCont &&
+            <ContactCard
+             contactName="Commerciante 1"
+             contactRif="J-765432345-2"
+             contactEmail="ommerciante1@gmail.com"
+             contactPhone="3209876783"
+             contactAddress="Calle Orinco Edif. Arbiacenter Piso PB OF PB-3 URB Las Merces Caracas Miranda Zone Postal 1060"
+            />     
             }
 
+            </FadeAnimation>
             <Menu />
         </div>
     )
