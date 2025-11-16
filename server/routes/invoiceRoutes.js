@@ -6,7 +6,7 @@ import { generateInvoice } from '../controllers/invoiceController.js'
 const router = express.Router()
 
 // Post invoice
-router.post("/generateInvoice", upload.single("receiptImage"), generateInvoice);
+router.post("/invoice", upload.single("receiptImage"), generateInvoice);
 
 
 export default router

@@ -9,6 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --lightBlue-background : #e3ecf0;
   --lightBlue-accent : #a6c0cd;
   --blue-accent : #2f6684;
   --darkBlue-accent: #0a0d25;

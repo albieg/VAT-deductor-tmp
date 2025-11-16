@@ -4,6 +4,7 @@ import { InputBox } from "../components/InputBox";
 import { Header } from "../components/Header";
 import { Menu } from "../components/menu";
 import { Divider } from "../components/Divider";
+import { FadeAnimation } from "../utils/FadeAnimation";
 
 export const AddContactView = () => {
     const [ contactType, setContactType ] = useState("vendor");
@@ -17,7 +18,8 @@ export const AddContactView = () => {
     }
 
     return(
-        <div className="flex h-screen flex-col gap-22">
+        <div>
+            <FadeAnimation>
         <Header>
             <div className="flex justify-start items-center h-18 p-4 px-6">
                 <Link to="/contacts">
@@ -29,7 +31,7 @@ export const AddContactView = () => {
             </div>
         </Header>
 
-        <div className="h-fit flex flex-col justify-center items-center select-none">
+        <div className="h-fit flex flex-col justify-center items-center select-none mt-22">
 
             <Divider label="Nuevo Contacto" />
 
@@ -96,8 +98,9 @@ export const AddContactView = () => {
                 </Link>
             </div>
 
-        <Menu/>
         </div>
+        </FadeAnimation>
+        <Menu/>
         </div>
     )
 }

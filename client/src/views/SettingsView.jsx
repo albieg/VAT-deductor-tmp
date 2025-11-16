@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Header } from "../components/Header";
 import { Menu } from "../components/menu";
 import { ExpandModal } from "../components/ExpandModal";
+import { FadeAnimation } from "../utils/FadeAnimation";
 
 export const SettingsView = () => {
     const [logoutModal, setLogoutModal] = useState(false);
@@ -11,7 +12,8 @@ export const SettingsView = () => {
     }
 
     return(
-        <div className="flex flex-col justify-center items-center">
+        <div>
+            <FadeAnimation>
             <Header>
                 <div className="flex flex-row items-center justify-between h-18 px-6 gap-2">
                     <h1 className="uppercase font-extrabold text-[var(--darkBlue-accent)] text-xl tracking-widest">Configuración</h1>
@@ -21,7 +23,7 @@ export const SettingsView = () => {
                 </div>
             </Header>
 
-            <div className="p-6 pt-16 flex flex-col items-center">
+            <div className="p-6 pt-16 flex flex-col items-center justify-center">
 
                 <div className="cursor-pointer flex justify-between items-center gap-3 w-80">
                     <h2 className="font-semibold text-[var(--blue-accent)]">Cambiar nombre de usuario</h2>
@@ -52,6 +54,7 @@ export const SettingsView = () => {
             </div>
 
             { logoutModal &&
+            <FadeAnimation>
             <ExpandModal
             onClick={openModal}
             title="¿Confirmas?"
@@ -63,8 +66,9 @@ export const SettingsView = () => {
                 </div>
             }
             />
+            </FadeAnimation>
             }
-
+            </FadeAnimation>
             <Menu />
         </div>
     )

@@ -5,12 +5,12 @@ import { viewUser, updateUser, deleteUser} from '../controllers/userController.j
 const router = express.Router()
 
 // Get user by ID
-router.get('/user/:id', viewUser)      // GET /user/:id
+router.get('/users/:id', viewUser)      // GET /user/:id
 
 // Update user by ID
-router.post('/user/id', updateUser)       // PATCH /user:/id
+router.post('/users/id/edit', updateUser)       // PATCH /user:/id
 
 // Delete user by ID
-router.delete('/user/:id', deleteUser)   // DELETE //user//:id
+router.delete('/users/:id', deleteUser)   // DELETE //user//:id
 
 export default router

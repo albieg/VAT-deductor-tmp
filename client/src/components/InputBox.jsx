@@ -1,9 +1,11 @@
 import React from "react";
 
-export const InputBox = ({id, width, htmlFor, label}) => {
+export const InputBox = ({onChange, value, id, width, htmlFor, label}) => {
     return(
         <div className="relative mx-3">
             <input
+            value={value}
+            onChange={onChange}
             id={id}
             text="text"
             placeholder=" "

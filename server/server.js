@@ -23,9 +23,9 @@ app.use('/uploads', express.static('uploads'))
 
 // API Routes
 app.use('/auth', authRoutes)
-app.use('/contact', authMiddleware, contactRoutes)
-app.use('/enterprise', authMiddleware, enterpriseRoutes)
-app.use('/user', authMiddleware, userRoutes)
+app.use('/contacts', authMiddleware, contactRoutes)
+app.use('/enterprises', authMiddleware, enterpriseRoutes)
+app.use('/users', authMiddleware, userRoutes)
 app.use('/invoice', authMiddleware, invoiceRoutes)
 
 // Serve React build in production
