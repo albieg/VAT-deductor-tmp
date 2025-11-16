@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "motion/react"
 import { Header } from "../components/Header";
 import { Menu } from "../components/menu";
 import { InfoLine } from "../components/InfoLine";

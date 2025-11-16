@@ -2,14 +2,33 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 import { Menu } from "../components/menu";
 import { ExpandModal } from "../components/ExpandModal";
+import { EditSetting } from "../components/EditSetting";
 import { FadeAnimation } from "../utils/FadeAnimation";
 
 export const SettingsView = () => {
-    const [logoutModal, setLogoutModal] = useState(false);
+    const [ logoutModal, setLogoutModal ] = useState(false);
+    const [ editing, setEditing ] = useState("");
 
-    const openModal = () => {
+    const handleModal = () => {
         setLogoutModal(prev => !prev)
-    }
+    };
+
+    const editUsername = () => {
+        setEditing("username")
+    };
+
+    const editPassword = () => {
+        setEditing("password")
+    };
+
+    const resetSerial = () => {
+        setEditing("serial")
+    };
+
+    const closeEdit = () => {
+        setEditing("")
+    };
+
 
     return(
         <div>
@@ -25,10 +44,18 @@ export const SettingsView = () => {
 
             <div className="p-6 pt-16 flex flex-col items-center justify-center">
 
-                <div className="cursor-pointer flex justify-between items-center gap-3 w-80">
+                <button onClick={editUsername} className="cursor-pointer flex justify-between items-center gap-3 w-80">
                     <h2 className="font-semibold text-[var(--blue-accent)]">Cambiar nombre de usuario</h2>
                     <img src="/src/assets/pencil-icon.svg" className="size-7"/>
-                </div>
+                </button>
+
+                { editing === "username" &&
+                <EditSetting
+                onClick={closeEdit}
+                label="Cambiar nombre de usuario"
+
+                />
+                }
 
                 <div className="w-90 h-0.5 bg-[var(--blue-accent)]/20 my-8"></div>
 
@@ -46,7 +73,7 @@ export const SettingsView = () => {
 
                 <div className="w-90 h-0.5 bg-[var(--blue-accent)]/20 my-8 mb-12"></div>
                 
-                <div onClick={openModal} className="cursor-pointer flex justify-center items-center gap-3 w-60 h-12 rounded-3xl border-2 border-[var(--blue-accent)] shadow-black/10 shadow-xl">
+                <div onClick={handleModal} className="cursor-pointer flex justify-center items-center gap-3 w-60 h-12 rounded-3xl border-2 border-[var(--blue-accent)] shadow-black/10 shadow-xl">
                     <h2 className="font-semibold text-[var(--blue-accent)]">Cerrar sesión</h2>
                     <img src="/src/assets/signOut-icon.svg" className="size-7"/>
                 </div>
@@ -56,7 +83,7 @@ export const SettingsView = () => {
             { logoutModal &&
             <FadeAnimation>
             <ExpandModal
-            onClick={openModal}
+            onClick={handleModal}
             title="¿Confirmas?"
             content={
                 <div className="h-full w-full">
